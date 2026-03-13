@@ -1,15 +1,32 @@
-import { ProcessLog, LogLevel } from '../../shared/types';
+import { ProcessLog, ValidationSeverity } from '../../shared/types';
 
 export class ProcessLogger {
   private readonly logs: ProcessLog[] = [];
 
-  public add(archivoXML: string, nivel: LogLevel, mensaje: string, detalle = ''): void {
+  public add(params: {
+    archivoXML: string;
+    estatus: ValidationSeverity;
+    mensajePrincipal: string;
+    observacionesGenerales?: string;
+    totalConceptos?: number;
+    conceptosIncluidosTotales?: number;
+    conceptosExcluidosTotales?: number;
+    uuid?: string;
+    serie?: string;
+    folio?: string;
+  }): void {
     this.logs.push({
-      archivoXML,
+      archivoXML: params.archivoXML,
       fecha: new Date().toISOString(),
-      nivel,
-      mensaje,
-      detalle,
+      estatus: params.estatus,
+      mensajePrincipal: params.mensajePrincipal,
+      observacionesGenerales: params.observacionesGenerales ?? '',
+      totalConceptos: params.totalConceptos ?? 0,
+      conceptosIncluidosTotales: params.conceptosIncluidosTotales ?? 0,
+      conceptosExcluidosTotales: params.conceptosExcluidosTotales ?? 0,
+      uuid: params.uuid ?? '',
+      serie: params.serie ?? '',
+      folio: params.folio ?? '',
     });
   }
 

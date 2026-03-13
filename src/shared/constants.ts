@@ -31,5 +31,11 @@ export const CELL_MAP = {
   LOGS_START_ROW: 2,
 };
 
+export const EXCEL_STATUS_FILL_COLORS = {
+  OK: null,
+  WARNING: 'FFFFE082',
+  ERROR: 'FFFFCDD2',
+} as const;
+
 export const HIDROCARBON_KEYWORDS = ['MAGNA', 'PREMIUM', 'DIESEL'];
 export const HIDROCARBON_KEYS = ['15101514', '15101515', '15101505'];

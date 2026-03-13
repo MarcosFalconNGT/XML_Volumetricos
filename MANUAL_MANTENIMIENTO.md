@@ -1,192 +1,510 @@
-# Manual de Mantenimiento del Sistema
+# Manual de Mantenimiento
 
-Guía rápida para modificar y mantener la aplicación **XML Volumétricos** sin romper el flujo principal.
+Guia tecnica para modificar el sistema sin romper el flujo de parseo, validacion, consolidacion y exportacion Excel.
 
----
+## 1. Objetivo de este manual
 
-## 1. Objetivo del sistema
+Este documento explica como mantener y extender el sistema en los puntos mas comunes:
 
-La app procesa XML CFDI y genera un Excel con 4 hojas:
-- `Resumen_General`
-- `Facturas`
-- `Conceptos`
-- `Logs`
+1. Agregar o quitar columnas del Excel
+2. Cambiar celdas fijas o filas de inicio de la plantilla
+3. Extraer nuevos valores desde el XML
+4. Agregar, quitar o modificar validaciones
+5. Cambiar reglas de clasificacion de hidrocarburos
+6. Ajustar colores de severidad
+7. Entender como se excluyen conceptos o XML
+8. Entender como funciona la bandera `Participa en Totales`
 
-Flujo general:
-1. UI selecciona carpeta de entrada/salida.
-2. Caso de uso procesa XML por XML.
-3. Se parsean facturas y conceptos.
-4. Se clasifican hidrocarburos.
-5. Se escribe Excel final usando plantilla.
+## 2. Mapa rapido de archivos importantes
 
----
+### Contratos y constantes
 
-## 2. Estructura que más se modifica
+1. `src/shared/types.ts`: define estructuras de datos compartidas
+2. `src/shared/constants.ts`: hojas, celdas fijas, filas de inicio, colores, claves de hidrocarburos
 
-- `src/shared/types.ts`: contratos de datos (qué campos existen).
-- `src/infrastructure/xml/cfdi-xml.parser.ts`: extracción de datos del XML.
-- `src/application/use-cases/process-xml-batch.use-case.ts`: consolidaciones/reglas del proceso.
-- `src/infrastructure/excel/excel-report.writer.ts`: orden y escritura de columnas en Excel.
-- `src/assets/templates/plantilla_XML_volumetricos.xlsx`: encabezados/estilo de columnas en la plantilla.
-- `src/domain/services/hydrocarbon-classifier.ts`: lógica de clasificación de productos.
+### Parseo y negocio
 
----
+1. `src/infrastructure/xml/cfdi-xml.parser.ts`: extrae datos crudos desde el XML
+2. `src/domain/services/cfdi-validator.ts`: valida factura y conceptos
+3. `src/domain/services/hydrocarbon-classifier.ts`: decide si un concepto es hidrocarburo
+4. `src/application/services/cfdi-transformer.ts`: convierte parseo + validacion en records exportables
+5. `src/application/use-cases/process-xml-batch.use-case.ts`: coordina todo el lote
 
-## 3. Cómo agregar o quitar columnas en Excel
+### Excel y logging
 
-Para cualquier columna nueva o eliminada, sigue este orden:
+1. `src/infrastructure/excel/excel-report.writer.ts`: escribe el archivo `.xlsx`
+2. `src/infrastructure/logging/process-logger.ts`: arma la estructura de logs por XML
+3. `src/assets/templates/plantilla_XML_volumetricos.xlsx`: plantilla base con encabezados y estilos
 
-1. **Definir el campo en tipos** (`types.ts`).
-2. **Llenar ese campo desde XML** (`cfdi-xml.parser.ts`) o desde la consolidación (`process-xml-batch.use-case.ts`).
-3. **Escribir o quitar la columna en Excel** (`excel-report.writer.ts`) en el arreglo de `writeRow`.
-4. **Actualizar la plantilla `.xlsx`** para que el encabezado y formato coincidan.
+## 3. Regla general para cualquier cambio
 
-Regla clave: el orden del arreglo enviado a `writeRow(...)` define el orden de columnas en la hoja.
+Siempre que cambies un dato visible en Excel, sigue este orden:
 
-### 3.1 Ejemplo: agregar una columna en Facturas
+1. Cambia el tipo o interface en `types.ts`
+2. Llena o calcula el dato en parser, transformer o use case
+3. Escribe el dato en `excel-report.writer.ts`
+4. Ajusta la plantilla `.xlsx`
+5. Actualiza la descripcion funcional del reporte en `README.md` si cambian columnas o significado de datos
+6. Compila con `npm run build`
+7. Prueba con XML reales
 
-#### Paso A: `src/shared/types.ts`
+## 4. Como agregar o quitar columnas en Excel
+
+## 4.1 Agregar una columna en Facturas
+
+### Paso 1. Agregar propiedad en `types.ts`
+
+Ejemplo:
+
 ```ts
 export interface FacturaRecord {
   archivoXML: string;
   uuid: string;
-  rfcEmisor: string; // nuevo campo
   fecha: string;
   serie: string;
   folio: string;
+  rfcEmisor: string;
   formaPago: string;
   metodoPago: string;
   moneda: string;
+  version: string;
+  estatus: ValidationSeverity;
   subTotal: number;
   total: number;
 }
 ```
 
-#### Paso B: `src/infrastructure/xml/cfdi-xml.parser.ts`
-Agregar el campo al construir `factura`:
-```ts
-const factura: FacturaRecord = {
-  archivoXML,
-  uuid: tfd,
-  rfcEmisor: this.getString((comprobante.Emisor as CfdiNode | undefined)?.Rfc),
-  fecha,
-  serie,
-  folio,
-  formaPago: this.getString(comprobante.FormaPago),
-  metodoPago: this.getString(comprobante.MetodoPago),
-  moneda: this.getString(comprobante.Moneda),
-  subTotal: this.getNumber(comprobante.SubTotal),
-  total: this.getNumber(comprobante.Total),
-};
-```
+### Paso 2. Llenar ese valor
 
-#### Paso C: `src/infrastructure/excel/excel-report.writer.ts`
-Dentro de `fillFacturasRows`, agregar la columna en el arreglo:
+Dependiendo del origen:
+
+1. Si viene del XML, extraelo en `cfdi-xml.parser.ts`
+2. Si depende de reglas de negocio, calculalo en `cfdi-transformer.ts` o `process-xml-batch.use-case.ts`
+
+### Paso 3. Escribir la columna en Excel
+
+Archivo:
+
+1. `src/infrastructure/excel/excel-report.writer.ts`
+
+Metodo a editar:
+
+1. `fillFacturasRows`
+
+Ejemplo:
+
 ```ts
 this.writeRow(sheet, rowIndex, [
   row.archivoXML,
   row.uuid,
-  row.rfcEmisor,
   row.fecha,
   row.serie,
   row.folio,
+  row.rfcEmisor,
   row.formaPago,
   row.metodoPago,
   row.moneda,
+  row.version,
+  row.estatus,
   row.subTotal,
   row.total,
 ]);
 ```
 
-#### Paso D: plantilla Excel
-En `plantilla_XML_volumetricos.xlsx`, agregar encabezado `RFC Emisor` en la hoja `Facturas` en la misma posición.
+### Paso 4. Ajustar plantilla
 
-### 3.2 Quitar una columna
+Agrega el encabezado en la hoja correcta del archivo `plantilla_XML_volumetricos.xlsx` y verifica que el orden coincida con `writeRow(...)`.
 
-1. Borra la propiedad de la interface correspondiente en `types.ts`.
-2. Elimina su llenado en parser o consolidación.
-3. Elimina su posición en el arreglo de `writeRow(...)`.
-4. Quita/ajusta el encabezado en la plantilla Excel.
+## 4.2 Agregar una columna en Conceptos
 
----
+Archivos tipicos a tocar:
 
-## 4. Cambiar reglas de clasificación (MAGNA/PREMIUM/DIESEL)
+1. `src/shared/types.ts`
+2. `src/application/services/cfdi-transformer.ts`
+3. `src/infrastructure/excel/excel-report.writer.ts`
+4. plantilla Excel
 
-Archivo: `src/domain/services/hydrocarbon-classifier.ts`
+Regla:
 
-Ahí se decide qué conceptos sí entran al reporte. Si quieres:
-- incluir nuevos productos,
-- cambiar claves SAT,
-- ajustar términos de búsqueda,
-modifica esa lógica y valida con XML reales.
+El orden del arreglo pasado a `writeRow(...)` define el orden de columnas real en la hoja.
 
----
+## 4.3 Quitar una columna
 
-## 5. Cambiar resumen o cálculos
+1. Elimina la propiedad del tipo correspondiente
+2. Elimina su calculo o llenado
+3. Elimina su posicion del `writeRow(...)`
+4. Ajusta el encabezado en la plantilla
 
-Archivo: `src/application/use-cases/process-xml-batch.use-case.ts`
+## 5. Como cambiar celdas fijas, filas de inicio y hojas
 
-Este caso de uso:
-- acumula registros,
-- maneja errores por archivo,
-- construye `resumen`.
+Archivo principal:
 
-Si quieres nuevas métricas (por ejemplo, por moneda, por método de pago, etc.), aquí se agregan y luego se reflejan en el writer de Excel.
+1. `src/shared/constants.ts`
 
----
+### 5.1 Cambiar una celda fija de resumen
 
-## 6. Validación recomendada después de cambios
+Ejemplo actual:
 
-Ejecuta:
+```ts
+export const CELL_MAP = {
+  FECHA_GENERACION: 'A4',
+  TOTAL_XML_PROCESADOS: 'C4',
+  TOTAL_XML_ERROR: 'E4',
+  ...
+};
+```
+
+Si quieres mover `TOTAL_XML_ERROR` de `E4` a `F4`, cambia solo la constante:
+
+```ts
+TOTAL_XML_ERROR: 'F4'
+```
+
+### 5.2 Cambiar fila inicial de una hoja
+
+Tambien en `CELL_MAP`:
+
+```ts
+FACTURAS_START_ROW: 2,
+CONCEPTOS_START_ROW: 2,
+LOGS_START_ROW: 2,
+```
+
+Si la plantilla ahora deja encabezado hasta la fila 3, ajusta el valor correspondiente.
+
+### 5.3 Cambiar nombre de una hoja
+
+En `SHEETS`:
+
+```ts
+export const SHEETS = {
+  RESUMEN: 'Resumen_General',
+  FACTURAS: 'Facturas',
+  CONCEPTOS: 'Conceptos',
+  LOGS: 'Logs',
+} as const;
+```
+
+Si cambias el nombre en la plantilla, debes cambiarlo tambien aqui o el writer fallara.
+
+## 6. Como extraer nuevos valores desde el XML
+
+Archivo principal:
+
+1. `src/infrastructure/xml/cfdi-xml.parser.ts`
+
+### Helpers importantes
+
+1. `getString(value)`: convierte a string limpio
+2. `getOptionalNumber(value)`: intenta convertir a numero y devuelve `null` si falta o es invalido
+
+### Regla actual
+
+No convertir faltantes a `0` automaticamente si eso oculta un error de datos. Si el numero puede faltar y eso debe validarse despues, usa `getOptionalNumber(...)`.
+
+### Ejemplo para agregar un dato de factura
+
+Si quieres extraer RFC del emisor:
+
+```ts
+const emisor = comprobante.Emisor as CfdiNode | undefined;
+
+const factura: ParsedFacturaRaw = {
+  ...,
+  rfcEmisor: this.getString(emisor?.Rfc),
+};
+```
+
+Luego deberas reflejarlo en el tipo y en el transformer si ese valor va a Excel.
+
+### Ejemplo para agregar un dato de concepto
+
+```ts
+return {
+  ...,
+  noIdentificacion: this.getString(concepto.NoIdentificacion),
+};
+```
+
+Despues:
+
+1. agregar propiedad al tipo crudo
+2. decidir si se valida
+3. pasarlo al `ConceptoRecord`
+4. escribirlo en Excel
+
+## 7. Como agregar, quitar o cambiar validaciones
+
+Archivo principal:
+
+1. `src/domain/services/cfdi-validator.ts`
+
+## 7.1 Estructura de una validacion
+
+El validador produce `ValidationIssue` con:
+
+1. `code`
+2. `severity`
+3. `scope`
+4. `message`
+5. `field`
+6. `conceptIndex`
+
+### Ejemplo: agregar nueva validacion de factura
+
+```ts
+if (!factura.formaPago) {
+  issues.push(
+    this.issue(
+      'FORMA_PAGO_MISSING',
+      'WARNING',
+      'FACTURA',
+      'FormaPago vacia.',
+      'FormaPago',
+    ),
+  );
+}
+```
+
+### Ejemplo: agregar nueva validacion de concepto
+
+```ts
+if (!concepto.unidad) {
+  issues.push(
+    this.issue(
+      'UNIDAD_MISSING',
+      'WARNING',
+      'CONCEPTO',
+      'Unidad vacia.',
+      'Unidad',
+      conceptIndex,
+    ),
+  );
+}
+```
+
+### Si quieres quitar una validacion
+
+Elimina o comenta el bloque correspondiente en `validateFactura(...)` o `validateConcepto(...)`.
+
+### Si quieres cambiar severidad
+
+Solo cambia el segundo parametro de `this.issue(...)`:
+
+```ts
+'WARNING' -> 'ERROR'
+```
+
+## 7.2 Como se define el estatus final
+
+Regla actual:
+
+1. Si existe al menos una incidencia `ERROR`, el estatus es `ERROR`
+2. Si no hay `ERROR` pero si `WARNING`, el estatus es `WARNING`
+3. Si no hay incidencias, el estatus es `OK`
+
+Esto aplica tanto para conceptos como para XML.
+
+## 8. Como se define la exclusion de conceptos
+
+Archivo principal:
+
+1. `src/application/services/cfdi-transformer.ts`
+
+Regla actual:
+
+1. Se evalua `normalizeProduct(descripcion, claveProdServ)`
+2. Si devuelve un hidrocarburo reconocido, el concepto se exporta
+3. Si devuelve `null`, el concepto no entra a la hoja `Conceptos`
+
+Esto significa que la exclusión hoy no depende directamente de `WARNING` o `ERROR`, sino de la clasificacion hidrocarburo.
+
+## 8.1 Como funciona `Participa en Totales`
+
+Archivo principal:
+
+1. `src/application/services/cfdi-transformer.ts`
+
+La bandera `participaEnTotales` es una decision logica para el resumen. No borra la fila ni modifica valores del XML.
+
+Regla actual:
+
+1. Solo aplica a conceptos hidrocarburo que si fueron exportados
+2. Es `false` si falta alguno de estos datos: `cantidad`, `valorUnitario`, `importe`, `IVA`, `total`
+3. Es `false` si el concepto tiene al menos una incidencia `ERROR`
+4. Es `false` si tiene alguno de estos `WARNING` criticos:
+  `IVA_REQUIRED_OBJETO_IMP_02`, `IVA_MISSING`, `IVA_NEGATIVE`, `CONCEPT_TOTAL_INCONSISTENT`
+5. En cualquier otro caso es `true`
+
+El resumen consolidado en `process-xml-batch.use-case.ts` solo suma conceptos con `participaEnTotales = true`.
+
+### Si quieres cambiar esta politica
+
+Toca este bloque:
+
+```ts
+const productoNormalizado = normalizeProduct(concepto.descripcion, concepto.claveProdServ);
+
+if (!productoNormalizado) {
+  return;
+}
+```
+
+Opciones tipicas:
+
+1. Exportar todos los conceptos, incluyendo no hidrocarburos
+2. Exportar no hidrocarburos con `estatus = WARNING`
+3. Mantener el comportamiento actual
+
+## 9. Como cambiar reglas de clasificacion de hidrocarburos
+
+Archivo principal:
+
+1. `src/domain/services/hydrocarbon-classifier.ts`
+
+Puedes modificar:
+
+1. claves SAT aceptadas
+2. palabras clave
+3. normalizacion final del producto
+
+Tambien puedes cambiar listas base en:
+
+1. `src/shared/constants.ts`
+
+Constantes actuales:
+
+1. `HIDROCARBON_KEYWORDS`
+2. `HIDROCARBON_KEYS`
+
+## 10. Como cambiar colores del Excel
+
+Archivo principal:
+
+1. `src/shared/constants.ts`
+
+Constante actual:
+
+```ts
+export const EXCEL_STATUS_FILL_COLORS = {
+  OK: null,
+  WARNING: 'FFFFE082',
+  ERROR: 'FFFFCDD2',
+} as const;
+```
+
+Reglas:
+
+1. `OK` sin color especial
+2. `WARNING` color amarillo
+3. `ERROR` color rojo
+
+El writer solo lee esta configuracion. No cambies colores directamente en `excel-report.writer.ts` salvo que tambien cambie la mecanica de pintado.
+
+## 11. Como cambiar el resumen consolidado
+
+Archivo principal:
+
+1. `src/application/use-cases/process-xml-batch.use-case.ts`
+
+Metodo clave:
+
+1. `buildResumen(...)`
+
+Actualmente el resumen:
+
+1. Usa solo conceptos exportados en la lista final
+2. Omite conceptos con datos numericos `null`
+3. Agrupa por `claveProdServ`, producto y `valorUnitario`
+
+### Si quieres cambiar agrupacion
+
+Edita la construccion de la llave:
+
+```ts
+const key = `${concepto.claveProdServ}|${productoResumen}|${concepto.valorUnitario.toFixed(6)}`;
+```
+
+### Si quieres agregar nuevas metricas
+
+1. agrega el campo a `ResumenRecord`
+2. calcula acumulacion en `buildResumen(...)`
+3. escribelo en `fillResumenRows(...)`
+4. agrega la columna en la plantilla
+
+## 12. Como cambiar logs y observaciones
+
+Archivos principales:
+
+1. `src/infrastructure/logging/process-logger.ts`
+2. `src/application/use-cases/process-xml-batch.use-case.ts`
+3. `src/infrastructure/excel/excel-report.writer.ts`
+
+Si quieres agregar nuevos campos al log:
+
+1. agrega propiedad a `ProcessLog` en `types.ts`
+2. llenala en `ProcessLogger.add(...)`
+3. envia el dato desde el use case
+4. escribelo en `fillLogsRows(...)`
+5. agrega encabezado en la plantilla
+
+## 13. Como editar la plantilla Excel sin romper el sistema
+
+Checklist:
+
+1. No cambies nombres de hojas sin actualizar `SHEETS`
+2. Si mueves celdas fijas, actualiza `CELL_MAP`
+3. Si agregas columnas, ajusta encabezado y formato en la plantilla
+4. Si cambias filas de inicio, actualiza `*_START_ROW`
+5. Verifica que las columnas del encabezado coincidan exactamente con el orden de `writeRow(...)`
+
+## 14. Errores comunes
+
+### "La plantilla no contiene todas las hojas requeridas"
+
+Verifica nombres exactos de hoja entre plantilla y `SHEETS`.
+
+### Columnas corridas o datos en columnas equivocadas
+
+La plantilla no coincide con el orden del arreglo enviado a `writeRow(...)`.
+
+### Campo siempre vacio en Excel
+
+1. No se parseo en `cfdi-xml.parser.ts`
+2. No se transfirio en `cfdi-transformer.ts`
+3. No se escribio en el writer
+
+### Build TypeScript falla tras un cambio
+
+Normalmente falto actualizar algun tipo o alguna asignacion intermedia.
+
+## 15. Flujo recomendado para cambios seguros
+
+1. Haz un cambio pequeño a la vez
+2. Compila con `npm run build`
+3. Ejecuta con `npm run dev`
+4. Prueba con XML validos y XML problematicos
+5. Verifica el Excel final y especialmente las hojas `Conceptos` y `Logs`
+
+## 16. Casos de prueba sugeridos tras mantenimiento
+
+1. XML valido con hidrocarburos
+2. XML valido con conceptos no hidrocarburo
+3. XML sin UUID
+4. XML sin timbre fiscal
+5. XML con moneda USD
+6. XML CFDI 3.3
+7. XML con cantidad faltante
+8. XML con importe faltante
+9. XML con IVA faltante
+10. XML con total inconsistente
+11. XML corrupto o no parseable
+
+## 17. Comandos utiles
 
 ```bash
 npm run build
 npm run dev
 ```
 
-Checklist mínimo:
-1. La app abre sin error.
-2. Procesa una carpeta de prueba con XML válidos.
-3. El Excel se genera en la ruta de salida.
-4. Las hojas tienen columnas correctas y datos alineados.
-5. Los logs registran errores esperados en XML defectuosos.
-
----
-
-## 7. Buenas prácticas de mantenimiento
-
-1. Cambia una cosa a la vez (tipos -> parser -> writer -> plantilla).
-2. Mantén consistencia entre nombre de campo en `types.ts` y uso en writer.
-3. Evita lógica de negocio en UI (`renderer`): colócala en `application/domain`.
-4. Si agregas una columna numérica, valida `number` y formato en Excel.
-5. Conserva nombres de hojas definidos en constantes para no romper la escritura.
-
----
-
-## 8. Errores comunes y solución rápida
-
-- **"La plantilla no contiene todas las hojas requeridas"**
-  - Verifica nombres exactos de hojas en la plantilla.
-
-- **Columna vacía en Excel**
-  - El campo no se está llenando en parser/consolidación o no se agregó al `writeRow`.
-
-- **Datos corridos (desalineados)**
-  - El orden del arreglo en `writeRow` no coincide con el encabezado en plantilla.
-
-- **Compilación TypeScript falla tras agregar campo**
-  - Faltó actualizar todas las asignaciones del tipo afectado.
-
----
-
-## 9. Procedimiento de cambio seguro (resumen)
-
-1. Crear rama de trabajo.
-2. Modificar tipos.
-3. Modificar extracción/cálculo.
-4. Modificar escritura Excel.
-5. Ajustar plantilla.
-6. Probar con XML reales.
-7. Confirmar resultado final en Excel y logs.
-
-Con este flujo puedes personalizar el sistema "a gusto" manteniendo estabilidad.
+Usa `npm run build` despues de cualquier cambio en tipos, validaciones, writer o parser.

@@ -1,8 +1,8 @@
 import path from 'node:path';
 import { format } from 'date-fns';
 import ExcelJS from 'exceljs';
-import { CELL_MAP, SHEETS } from '../../shared/constants';
-import { ConceptoRecord, FacturaRecord, ProcessLog, ResumenRecord } from '../../shared/types';
+import { CELL_MAP, EXCEL_STATUS_FILL_COLORS, SHEETS } from '../../shared/constants';
+import { ConceptoRecord, FacturaRecord, ProcessLog, ResumenRecord, ValidationSeverity } from '../../shared/types';
 
 export interface ExcelWritePayload {
   templatePath: string;
@@ -12,6 +12,8 @@ export interface ExcelWritePayload {
   resumen: ResumenRecord[];
   logs: ProcessLog[];
   totalXmlProcesados: number;
+  totalXmlOk: number;
+  totalXmlWarning: number;
   totalXmlError: number;
 }
 
@@ -93,6 +95,8 @@ export class ExcelReportWriter {
         row.formaPago,
         row.metodoPago,
         row.moneda,
+        row.version,
+        row.estatus,
         row.subTotal,
         row.total,
       ]);
@@ -121,7 +125,11 @@ export class ExcelReportWriter {
         row.tasaIVA,
         row.IVA,
         row.total,
+        row.estatus,
+        row.observaciones,
+        row.participaEnTotales ? 'Si' : 'No',
       ]);
+      this.applyConceptStatusStyle(sheet, rowIndex, row.estatus);
       rowIndex++;
     }
   }
@@ -133,10 +141,16 @@ export class ExcelReportWriter {
       this.copyRowStyle(sheet, CELL_MAP.LOGS_START_ROW, rowIndex);
       this.writeRow(sheet, rowIndex, [
         row.archivoXML,
+        row.estatus,
+        row.mensajePrincipal,
+        row.totalConceptos,
+        row.conceptosIncluidosTotales,
+        row.conceptosExcluidosTotales,
+        row.observacionesGenerales,
+        row.uuid,
+        row.serie,
+        row.folio,
         row.fecha,
-        row.nivel,
-        row.mensaje,
-        row.detalle,
       ]);
       rowIndex++;
     }
@@ -160,6 +174,28 @@ export class ExcelReportWriter {
       for (let colIndex = 1; colIndex <= maxCols; colIndex++) {
         sheet.getCell(rowIndex, colIndex).value = null;
       }
+    }
+  }
+
+  private applyConceptStatusStyle(
+    sheet: ExcelJS.Worksheet,
+    rowIndex: number,
+    estatus: ValidationSeverity,
+  ): void {
+    const fillColor = EXCEL_STATUS_FILL_COLORS[estatus];
+    if (!fillColor) {
+      return;
+    }
+
+    const maxCols = sheet.columnCount || 20;
+
+    for (let colIndex = 1; colIndex <= maxCols; colIndex++) {
+      const cell = sheet.getCell(rowIndex, colIndex);
+      cell.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: fillColor },
+      };
     }
   }
 

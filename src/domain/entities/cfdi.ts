@@ -1,6 +1,1 @@
-import { ConceptoRecord, FacturaRecord } from '../../shared/types';
-
-export interface ParsedCfdi {
-  factura: FacturaRecord;
-  conceptos: ConceptoRecord[];
-}
+export type { ParsedCfdi } from '../../shared/types';

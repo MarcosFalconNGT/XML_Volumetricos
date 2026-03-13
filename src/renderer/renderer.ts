@@ -59,13 +59,17 @@ startBtn.addEventListener('click', async () => {
     progressBar.value = 100;
     progressText.textContent = 'Proceso finalizado';
     appendLog(`[INFO] XML procesados: ${result.totalXmlProcesados}`);
+    appendLog(`[INFO] XML OK: ${result.totalXmlOk}`);
+    appendLog(`[INFO] XML WARNING: ${result.totalXmlWarning}`);
     appendLog(`[INFO] XML con error: ${result.totalXmlError}`);
     appendLog(`[INFO] Facturas: ${result.facturas.length}`);
     appendLog(`[INFO] Conceptos: ${result.conceptos.length}`);
     appendLog(`[INFO] Archivo generado: ${result.outputPath}`);
 
     for (const log of result.logs) {
-      appendLog(`[${log.nivel}] ${log.archivoXML} - ${log.mensaje}${log.detalle ? ` | ${log.detalle}` : ''}`);
+      appendLog(
+        `[${log.estatus}] ${log.archivoXML} - ${log.mensajePrincipal} | Conceptos: ${log.totalConceptos} | Incluidos: ${log.conceptosIncluidosTotales} | Excluidos: ${log.conceptosExcluidosTotales}${log.observacionesGenerales ? ` | ${log.observacionesGenerales}` : ''}`,
+      );
     }
   } catch (error) {
     appendLog(`[ERROR] ${error instanceof Error ? error.message : 'Error desconocido'}`);

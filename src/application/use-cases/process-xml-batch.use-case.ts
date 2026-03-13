@@ -3,7 +3,23 @@ import { FileSystemService } from '../../infrastructure/fs/file-system.service';
 import { CfdiXmlParser } from '../../infrastructure/xml/cfdi-xml.parser';
 import { ExcelReportWriter } from '../../infrastructure/excel/excel-report.writer';
 import { ProcessLogger } from '../../infrastructure/logging/process-logger';
-import { ProcessProgress, ProcessResult, ResumenRecord } from '../../shared/types';
+import { CfdiValidator } from '../../domain/services/cfdi-validator';
+import { CfdiTransformer } from '../services/cfdi-transformer';
+import {
+  ParsedCfdi,
+  ProcessProgress,
+  ProcessResult,
+  ResumenRecord,
+  ValidationIssue,
+  ValidationSeverity,
+  XmlProcessingResult,
+} from '../../shared/types';
+
+interface ParsedFileResult {
+  archivoXML: string;
+  parsed: ParsedCfdi | null;
+  parseError: string;
+}
 
 export interface ProcessXmlBatchInput {
   inputDir: string;
@@ -17,6 +33,8 @@ export class ProcessXmlBatchUseCase {
     private readonly fsService: FileSystemService,
     private readonly parser: CfdiXmlParser,
     private readonly excelWriter: ExcelReportWriter,
+    private readonly validator: CfdiValidator = new CfdiValidator(),
+    private readonly transformer: CfdiTransformer = new CfdiTransformer(),
   ) {}
 
   public async execute(input: ProcessXmlBatchInput): Promise<ProcessResult> {
@@ -31,7 +49,7 @@ export class ProcessXmlBatchUseCase {
 
     const facturas = [] as ProcessResult['facturas'];
     const conceptos = [] as ProcessResult['conceptos'];
-    let totalXmlError = 0;
+    const parsedFiles: ParsedFileResult[] = [];
 
     for (const [index, filePath] of xmlFiles.entries()) {
       const archivoXML = path.basename(filePath);
@@ -44,19 +62,55 @@ export class ProcessXmlBatchUseCase {
 
       try {
         const parsed = await this.parser.parse(filePath);
-        facturas.push(parsed.factura);
-        conceptos.push(...parsed.conceptos);
-        logger.add(archivoXML, 'INFO', 'XML procesado correctamente', `Conceptos detectados: ${parsed.conceptos.length}`);
-      } catch (error) {
-        totalXmlError += 1;
-        logger.add(
+        parsedFiles.push({
           archivoXML,
-          'ERROR',
-          'Error al procesar XML',
-          error instanceof Error ? error.message : 'Error desconocido',
-        );
+          parsed,
+          parseError: '',
+        });
+      } catch (error) {
+        parsedFiles.push({
+          archivoXML,
+          parsed: null,
+          parseError: error instanceof Error ? error.message : 'Error desconocido',
+        });
       }
     }
+
+    const duplicateUuids = this.findDuplicateUuids(parsedFiles);
+    const processingResults = parsedFiles.map((item) => this.processParsedFile(item, duplicateUuids));
+
+    for (const result of processingResults) {
+      if (result.facturaRecord) {
+        facturas.push(result.facturaRecord);
+      }
+      conceptos.push(...result.conceptoRecords);
+
+      logger.add({
+        archivoXML: result.archivoXML,
+        estatus: result.estatus,
+        mensajePrincipal: result.mensajePrincipal,
+        observacionesGenerales: result.observacionesGenerales,
+        totalConceptos: result.conceptosRaw.length,
+        conceptosIncluidosTotales: result.conceptosIncluidosTotales,
+        conceptosExcluidosTotales: result.conceptosExcluidosTotales,
+        uuid: result.facturaRaw?.uuid ?? '',
+        serie: result.facturaRaw?.serie ?? '',
+        folio: result.facturaRaw?.folio ?? '',
+      });
+    }
+
+    const totalXmlError = processingResults.filter((item) => item.estatus === 'ERROR').length;
+    const totalXmlWarning = processingResults.filter((item) => item.estatus === 'WARNING').length;
+    const totalXmlOk = processingResults.filter((item) => item.estatus === 'OK').length;
+    const totalConceptosProcesados = processingResults.reduce((sum, item) => sum + item.conceptosRaw.length, 0);
+    const totalConceptosIncluidosTotales = processingResults.reduce(
+      (sum, item) => sum + item.conceptosIncluidosTotales,
+      0,
+    );
+    const totalConceptosExcluidosTotales = processingResults.reduce(
+      (sum, item) => sum + item.conceptosExcluidosTotales,
+      0,
+    );
 
     const resumen = this.buildResumen(conceptos);
     const outputPath = await this.excelWriter.write({
@@ -67,10 +121,20 @@ export class ProcessXmlBatchUseCase {
       resumen,
       logs: logger.all(),
       totalXmlProcesados: xmlFiles.length,
+      totalXmlOk,
+      totalXmlWarning,
       totalXmlError,
     });
 
-    logger.add('GLOBAL', 'INFO', 'Proceso completado', `Archivo generado: ${outputPath}`);
+    logger.add({
+      archivoXML: 'GLOBAL',
+      estatus: 'OK',
+      mensajePrincipal: 'Proceso completado',
+      observacionesGenerales: `Archivo generado: ${outputPath}`,
+      totalConceptos: totalConceptosProcesados,
+      conceptosIncluidosTotales: totalConceptosIncluidosTotales,
+      conceptosExcluidosTotales: totalConceptosExcluidosTotales,
+    });
 
     return {
       facturas,
@@ -78,16 +142,126 @@ export class ProcessXmlBatchUseCase {
       resumen,
       logs: logger.all(),
       totalXmlProcesados: xmlFiles.length,
+      totalXmlOk,
+      totalXmlWarning,
       totalXmlError,
       outputPath,
     };
+  }
+
+  private processParsedFile(item: ParsedFileResult, duplicateUuids: Set<string>): XmlProcessingResult {
+    if (!item.parsed) {
+      return {
+        archivoXML: item.archivoXML,
+        estatus: 'ERROR',
+        mensajePrincipal: 'Error al procesar XML',
+        observacionesGenerales: item.parseError,
+        facturaRaw: null,
+        conceptosRaw: [],
+        facturaRecord: null,
+        conceptoRecords: [],
+        conceptosIncluidosTotales: 0,
+        conceptosExcluidosTotales: 0,
+        issues: [
+          {
+            code: 'XML_PARSE_ERROR',
+            severity: 'ERROR',
+            scope: 'XML',
+            message: item.parseError,
+          },
+        ],
+      };
+    }
+
+    const validation = this.validator.validate(item.parsed, { duplicateUuids });
+    const estatus = validation.severity;
+
+    const facturaRecord = this.transformer.toFacturaRecord(item.parsed, estatus);
+    const conceptoRecords = this.transformer.toConceptoRecords(item.parsed, validation.conceptos);
+    const conceptosIncluidosTotales = conceptoRecords.filter((concepto) => concepto.participaEnTotales).length;
+    const conceptosExcluidosTotales = item.parsed.conceptos.length - conceptosIncluidosTotales;
+    const observacionesGenerales = this.buildIssuesDetail(validation.issues);
+
+    return {
+      archivoXML: item.archivoXML,
+      estatus,
+      mensajePrincipal: this.getMainMessage(estatus),
+      observacionesGenerales,
+      facturaRaw: item.parsed.factura,
+      conceptosRaw: item.parsed.conceptos,
+      facturaRecord,
+      conceptoRecords,
+      conceptosIncluidosTotales,
+      conceptosExcluidosTotales,
+      issues: validation.issues,
+    };
+  }
+
+  private getMainMessage(estatus: ValidationSeverity): string {
+    if (estatus === 'OK') {
+      return 'XML procesado correctamente';
+    }
+
+    if (estatus === 'WARNING') {
+      return 'XML procesado con advertencias';
+    }
+
+    return 'XML procesado con errores de validación';
+  }
+
+  private buildIssuesDetail(issues: ValidationIssue[]): string {
+    if (issues.length === 0) {
+      return '';
+    }
+
+    return issues.map((issue) => issue.message).join('; ');
+  }
+
+  private findDuplicateUuids(parsedFiles: ParsedFileResult[]): Set<string> {
+    const occurrences = new Map<string, number>();
+
+    for (const item of parsedFiles) {
+      const uuid = item.parsed?.factura.uuid.trim();
+      if (!uuid) {
+        continue;
+      }
+
+      const count = occurrences.get(uuid) ?? 0;
+      occurrences.set(uuid, count + 1);
+    }
+
+    const duplicates = new Set<string>();
+    for (const [uuid, count] of occurrences.entries()) {
+      if (count > 1) {
+        duplicates.add(uuid);
+      }
+    }
+
+    return duplicates;
   }
 
   private buildResumen(conceptos: ProcessResult['conceptos']): ResumenRecord[] {
     const grouped = new Map<string, ResumenRecord>();
 
     for (const concepto of conceptos) {
-      const key = `${concepto.claveProdServ}|${concepto.descripcion}|${concepto.valorUnitario.toFixed(6)}`;
+      if (!concepto.participaEnTotales) {
+        continue;
+      }
+
+      if (
+        concepto.cantidad === null ||
+        concepto.valorUnitario === null ||
+        concepto.importe === null ||
+        concepto.IVA === null ||
+        concepto.total === null
+      ) {
+        continue;
+      }
+
+      const productoResumen = concepto.productoNormalizado !== 'NO_RECONOCIDO'
+        ? concepto.productoNormalizado
+        : concepto.descripcion;
+      const key = `${concepto.claveProdServ}|${productoResumen}|${concepto.valorUnitario.toFixed(6)}`;
       const existing = grouped.get(key);
 
       if (existing) {
@@ -101,7 +275,7 @@ export class ProcessXmlBatchUseCase {
 
       grouped.set(key, {
         claveProdServ: concepto.claveProdServ,
-        producto: concepto.descripcion,
+        producto: productoResumen,
         cantidad: concepto.cantidad,
         valorUnitario: concepto.valorUnitario,
         importe: concepto.importe,

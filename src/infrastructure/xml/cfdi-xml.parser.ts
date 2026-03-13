@@ -2,8 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { XMLParser } from 'fast-xml-parser';
 import { ParsedCfdi } from '../../domain/entities/cfdi';
-import { normalizeProduct } from '../../domain/services/hydrocarbon-classifier';
-import { ConceptoRecord, FacturaRecord } from '../../shared/types';
+import { ParsedConceptoRaw, ParsedFacturaRaw } from '../../shared/types';
 
 interface CfdiNode {
   [key: string]: unknown;
@@ -39,24 +38,28 @@ export class CfdiXmlParser {
     const folio = this.getString(comprobante.Folio);
     const fecha = this.getString(comprobante.Fecha);
 
-    const tfd = this.extractTimbreUuid(comprobante);
+    const timbre = this.extractTimbreData(comprobante);
 
-    const factura: FacturaRecord = {
+    const factura: ParsedFacturaRaw = {
       archivoXML,
-      uuid: tfd,
+      version: this.getString(comprobante.Version),
+      uuid: timbre.uuid,
       fecha,
       serie,
       folio,
       formaPago: this.getString(comprobante.FormaPago),
       metodoPago: this.getString(comprobante.MetodoPago),
       moneda: this.getString(comprobante.Moneda),
-      subTotal: this.getNumber(comprobante.SubTotal),
-      total: this.getNumber(comprobante.Total),
+      subTotal: this.getOptionalNumber(comprobante.SubTotal),
+      total: this.getOptionalNumber(comprobante.Total),
+      subTotalRaw: this.getString(comprobante.SubTotal),
+      totalRaw: this.getString(comprobante.Total),
+      hasTimbreFiscal: timbre.exists,
     };
 
-    const conceptos = conceptosArray
-      .map((concepto) => this.mapConcepto(tfd, serie, folio, fecha, concepto as CfdiNode))
-      .filter((item): item is ConceptoRecord => item !== null);
+    const conceptos = conceptosArray.map((concepto) =>
+      this.mapConcepto(timbre.uuid, serie, folio, fecha, concepto as CfdiNode),
+    );
 
     return { factura, conceptos };
   }
@@ -67,17 +70,11 @@ export class CfdiXmlParser {
     folio: string,
     fecha: string,
     concepto: CfdiNode,
-  ): ConceptoRecord | null {
+  ): ParsedConceptoRaw {
     const claveProdServ = this.getString(concepto.ClaveProdServ);
     const descripcion = this.getString(concepto.Descripcion);
-    const producto = normalizeProduct(descripcion, claveProdServ);
-
-    if (!producto) {
-      return null;
-    }
 
     const impuestos = this.extractConceptIva(concepto);
-    const importe = this.getNumber(concepto.Importe);
 
     return {
       uuid,
@@ -85,34 +82,48 @@ export class CfdiXmlParser {
       folio,
       fecha,
       claveProdServ,
-      descripcion: producto,
+      descripcion,
       claveUnidad: this.getString(concepto.ClaveUnidad),
       unidad: this.getString(concepto.Unidad),
-      cantidad: this.getNumber(concepto.Cantidad),
-      valorUnitario: this.getNumber(concepto.ValorUnitario),
-      importe,
-
+      objetoImp: this.getString(concepto.ObjetoImp),
+      cantidad: this.getOptionalNumber(concepto.Cantidad),
+      valorUnitario: this.getOptionalNumber(concepto.ValorUnitario),
+      importe: this.getOptionalNumber(concepto.Importe),
       baseIVA: impuestos.baseIva,
       tasaIVA: impuestos.tasaIva,
       IVA: impuestos.iva,
-      total: importe + impuestos.iva,
+      cantidadRaw: this.getString(concepto.Cantidad),
+      valorUnitarioRaw: this.getString(concepto.ValorUnitario),
+      importeRaw: this.getString(concepto.Importe),
+      tasaIVARaw: impuestos.tasaIvaRaw,
+      ivaRaw: impuestos.ivaRaw,
+      hasIvaTraslado: impuestos.hasIvaTraslado,
     };
   }
 
-  private extractTimbreUuid(comprobante: CfdiNode): string {
+  private extractTimbreData(comprobante: CfdiNode): { uuid: string; exists: boolean } {
     const complemento = comprobante.Complemento as CfdiNode | undefined;
-    if (!complemento) return '';
+    if (!complemento) {
+      return { uuid: '', exists: false };
+    }
 
     const timbre = (complemento.TimbreFiscalDigital as CfdiNode | undefined) ||
       ((complemento as Record<string, unknown>)['tfd:TimbreFiscalDigital'] as CfdiNode | undefined);
 
-    return timbre ? this.getString(timbre.UUID) : '';
+    if (!timbre) {
+      return { uuid: '', exists: false };
+    }
+
+    return { uuid: this.getString(timbre.UUID), exists: true };
   }
 
   private extractConceptIva(concepto: CfdiNode): {
-    baseIva: number;
-    tasaIva: number;
-    iva: number;
+    baseIva: number | null;
+    tasaIva: number | null;
+    iva: number | null;
+    tasaIvaRaw: string;
+    ivaRaw: string;
+    hasIvaTraslado: boolean;
   } {
     const impuestosNode = concepto.Impuestos as CfdiNode | undefined;
     const trasladosNode = (impuestosNode?.Traslados as CfdiNode | undefined)?.Traslado;
@@ -123,24 +134,49 @@ export class CfdiXmlParser {
         ? [trasladosNode]
         : [];
 
-    let baseIva = 0;
-    let tasaIva = 0;
-    let iva = 0;
+    let baseIvaSum = 0;
+    let ivaSum = 0;
+    let hasBase = false;
+    let hasIva = false;
+    let tasaIva: number | null = null;
+    let tasaIvaRaw = '';
+    let ivaRaw = '';
+    let hasIvaTraslado = false;
 
     for (const traslado of traslados as CfdiNode[]) {
       const impuesto = this.getString(traslado.Impuesto);
 
       if (impuesto === '002') {
-        baseIva += this.getNumber(traslado.Base);
-        iva += this.getNumber(traslado.Importe);
-        tasaIva = this.getNumber(traslado.TasaOCuota);
+        hasIvaTraslado = true;
+
+        const base = this.getOptionalNumber(traslado.Base);
+        if (base !== null) {
+          hasBase = true;
+          baseIvaSum += base;
+        }
+
+        const iva = this.getOptionalNumber(traslado.Importe);
+        if (iva !== null) {
+          hasIva = true;
+          ivaSum += iva;
+          ivaRaw = this.getString(traslado.Importe);
+        }
+
+        const tasa = this.getOptionalNumber(traslado.TasaOCuota);
+        if (tasa !== null) {
+          tasaIva = tasa;
+          tasaIvaRaw = this.getString(traslado.TasaOCuota);
+        }
       }
     }
 
     return {
-      baseIva,
+      baseIva: hasBase ? baseIvaSum : null,
       tasaIva,
-      iva,
+      iva: hasIva ? ivaSum : null,
+      tasaIvaRaw,
+      ivaRaw,
+      hasIvaTraslado,
     };
   }
 
@@ -149,8 +185,22 @@ export class CfdiXmlParser {
     return value == null ? '' : String(value).trim();
   }
 
-  private getNumber(value: unknown): number {
-    const parsed = Number(value ?? 0);
-    return Number.isFinite(parsed) ? parsed : 0;
+  private getOptionalNumber(value: unknown): number | null {
+    const raw = this.getString(value);
+    if (!raw) {
+      return null;
+    }
+
+    const parsed = Number(raw);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+
+  private requireNumber(value: unknown, fieldName: string): number {
+    const parsed = this.getOptionalNumber(value);
+    if (parsed === null) {
+      throw new Error(`El campo numérico ${fieldName} es requerido y no es válido.`);
+    }
+
+    return parsed;
   }
 }

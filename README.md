@@ -1,317 +1,528 @@
-# XML Volumétricos
+# XML Volumetricos
 
-Aplicación de escritorio que automatiza el procesamiento masivo de archivos **XML CFDI** (facturas electrónicas del SAT) relacionados con ventas de hidrocarburos. Lee una carpeta completa de XMLs, extrae la información de cada factura, filtra los conceptos correspondientes a MAGNA, PREMIUM y DIESEL, y genera un reporte **Excel** estructurado listo para el control volumétrico.
+Aplicacion de escritorio en Electron + Node.js + TypeScript para procesar CFDI XML de combustibles, validar su consistencia y generar un reporte Excel auditable para control administrativo y volumetrico.
 
----
+El sistema esta orientado a gasolineras y escenarios donde no basta con extraer datos: tambien es necesario identificar XML parseables pero inconsistentes, mostrar incidencias y mantener trazabilidad completa por archivo.
 
-## Índice
+## Objetivo del sistema
 
-1. [¿Qué hace?](#qué-hace)
-2. [Tecnologías](#tecnologías)
-3. [Arquitectura](#arquitectura)
-4. [Estructura de carpetas](#estructura-de-carpetas)
-5. [Descripción de cada archivo](#descripción-de-cada-archivo)
-6. [Flujo completo](#flujo-completo)
-7. [Instalación y ejecución](#instalación-y-ejecución)
-8. [Plantilla Excel](#plantilla-excel)
-9. [Notas importantes](#notas-importantes)
+La aplicacion toma una carpeta con XML CFDI, procesa cada archivo y genera un Excel con estas hojas:
 
----
+1. `Resumen_General`
+2. `Facturas`
+3. `Conceptos`
+4. `Logs`
 
-## ¿Qué hace?
+El resultado busca cubrir dos necesidades al mismo tiempo:
 
-1. El usuario abre la aplicación y selecciona:
-   - Una **carpeta de entrada** que contiene los archivos XML CFDI.
-   - Una **carpeta de salida** donde se guardará el Excel (por defecto el Escritorio).
-2. La app procesa cada XML, extrae los datos del comprobante y filtra únicamente los conceptos que correspondan a hidrocarburos (MAGNA, PREMIUM, DIESEL).
-3. Al terminar genera un archivo `XML_Volumetricos_DDMMYYHHMMSS.xlsx` con cuatro hojas:
+1. Reporte operativo de hidrocarburos
+2. Auditoria tecnica y fiscal de los XML procesados
 
-| Hoja | Contenido |
-|---|---|
-| `Resumen_General` | Totales por producto hidrocarburo (cantidad, valor, importe) |
-| `Facturas` | Una fila por cada XML con datos del comprobante (UUID, serie, folio, totales, etc.) |
-| `Conceptos` | Una fila por cada concepto de hidrocarburo detectado |
-| `Logs` | Registro de éxito o error de cada archivo XML procesado |
+## Comportamiento funcional actual
 
----
+### Que hace
 
-## Tecnologías
+1. Lee todos los archivos `.xml` de una carpeta.
+2. Parsea el nodo `Comprobante` y sus `Conceptos`.
+3. Valida factura y conceptos con severidades `OK`, `WARNING` y `ERROR`.
+4. Conserva las facturas parseables aunque tengan incidencias.
+5. En la hoja `Conceptos`, solo exporta conceptos reconocidos como hidrocarburos.
+6. Marca cada concepto exportado con `estatus` y `observaciones`.
+7. Calcula una bandera logica `Participa en Totales` para decidir si ese concepto entra o no al resumen.
+8. Colorea las filas de `Conceptos` segun severidad.
+9. Genera un log por XML con contador de conceptos detectados, exportados y excluidos.
 
-| Tecnología | Versión | Rol |
-|---|---|---|
-| **Electron** | 35.x | Framework de aplicación de escritorio |
-| **TypeScript** | 5.x | Lenguaje principal |
-| **fast-xml-parser** | 4.x | Lectura y parseo de archivos XML CFDI |
-| **ExcelJS** | 4.x | Escritura del reporte Excel sobre plantilla |
-| **date-fns** | 4.x | Formateo de fechas |
+### Que se excluye hoy
 
----
+#### Se excluye completamente del archivo final
 
-## Arquitectura
+1. XML que no puede parsearse
+2. XML sin estructura minima para construir `Comprobante`
 
-El proyecto sigue una **arquitectura en capas limpia** (Clean Architecture), donde cada capa tiene una responsabilidad única y no depende de las capas externas:
+#### Se excluye de la hoja `Conceptos`
 
+1. Conceptos que no sean hidrocarburos segun `normalizeProduct`
+
+#### Se mantiene visible en el Excel aunque tenga incidencias
+
+1. Facturas parseables con `WARNING` o `ERROR`
+2. Conceptos hidrocarburo con `WARNING` o `ERROR`
+
+### Regla importante de negocio
+
+La hoja `Conceptos` no es una copia total de todos los conceptos del CFDI. Es un listado de conceptos hidrocarburo reconocidos por el clasificador del sistema.
+
+Si `normalizeProduct` no reconoce el concepto como hidrocarburo, ese concepto no entra a la lista de `Conceptos`, aunque el XML siga apareciendo en `Facturas` y `Logs`.
+
+## Severidades
+
+El sistema usa tres severidades:
+
+1. `OK`: no se detectaron incidencias
+2. `WARNING`: el XML o concepto pudo procesarse, pero presenta datos sospechosos o no ideales
+3. `ERROR`: existe una inconsistencia fuerte o un dato requerido faltante/invalido
+
+## Validaciones implementadas
+
+## Validaciones a nivel XML / Factura
+
+Se ejecutan en `CfdiValidator`.
+
+### `ERROR`
+
+1. No hay conceptos en el XML
+2. `SubTotal` faltante o invalido
+3. `SubTotal` negativo
+4. `Total` faltante o invalido
+5. `Total` negativo
+
+### `WARNING`
+
+1. UUID vacio
+2. UUID duplicado dentro del lote
+3. XML sin timbre fiscal
+4. Version CFDI distinta de `4.0`
+5. Moneda distinta de `MXN`
+6. Total inconsistente contra suma de importes + IVA con tolerancia decimal
+
+## Validaciones a nivel Concepto
+
+Tambien se ejecutan en `CfdiValidator`.
+
+### `ERROR`
+
+1. `ClaveProdServ` faltante
+2. `Cantidad` faltante o invalida
+3. `Cantidad <= 0`
+4. `ValorUnitario` faltante o invalido
+5. `ValorUnitario <= 0`
+6. `Importe` faltante o invalido
+7. `Importe` negativo
+
+### `WARNING`
+
+1. `ClaveProdServ` sospechosa si no tiene 8 digitos
+2. `Descripcion` vacia
+3. `ObjetoImp = 02` sin traslado de IVA
+4. IVA faltante cuando existe traslado
+5. IVA negativo
+6. Tasa IVA distinta de `0.160000`
+7. `Importe` inconsistente contra `Cantidad x ValorUnitario`
+8. Producto no reconocido por `normalizeProduct`
+
+## Regla de exclusion de conceptos
+
+Actualmente la exclusion de la hoja `Conceptos` se define por clasificacion de hidrocarburo:
+
+1. Si `normalizeProduct` devuelve `MAGNA`, `PREMIUM` o `DIESEL`, el concepto se exporta.
+2. Si `normalizeProduct` no reconoce el concepto, no se exporta en la hoja `Conceptos`.
+
+Esto significa que un concepto puede tener `WARNING` o `ERROR` y aun asi aparecer en `Conceptos`, siempre que siga siendo un hidrocarburo reconocido.
+
+Adicionalmente, cada concepto exportado lleva una bandera logica llamada `Participa en Totales`. Esa bandera no elimina la fila ni altera los valores del XML; solo determina si JavaScript lo toma en cuenta para el resumen consolidado.
+
+## Arquitectura actual
+
+El proyecto esta organizado por capas con responsabilidades separadas.
+
+```text
+renderer                -> Interfaz de usuario
+main / preload          -> Integracion Electron + IPC
+application             -> Orquestacion del proceso por lote
+domain                  -> Reglas de negocio y validacion
+infrastructure          -> XML, Excel, logging, filesystem
+shared                  -> Tipos y constantes compartidas
 ```
-┌────────────────────────────────────────────┐
-│              renderer (UI)                 │  ← Interfaz de usuario (HTML/CSS/JS)
-├────────────────────────────────────────────┤
-│                 main / preload             │  ← Electron: ventana, IPC, seguridad
-├────────────────────────────────────────────┤
-│              application                   │  ← Caso de uso: orquesta el proceso
-├────────────────────────────────────────────┤
-│                 domain                     │  ← Reglas de negocio puras
-├────────────────────────────────────────────┤
-│              infrastructure                │  ← Acceso a XML, Excel y sistema de archivos
-├────────────────────────────────────────────┤
-│                 shared                     │  ← Tipos y constantes compartidas
-└────────────────────────────────────────────┘
+
+## Componentes principales
+
+### `src/infrastructure/xml/cfdi-xml.parser.ts`
+
+Responsabilidad:
+
+1. Leer el XML
+2. Parsearlo con `fast-xml-parser`
+3. Extraer datos crudos de factura y conceptos
+4. Mantener numeros opcionales como `null` en vez de forzarlos a `0`
+
+Nota:
+
+El parser ya no decide exclusiones de negocio. Solo construye datos parseados.
+
+### `src/domain/services/cfdi-validator.ts`
+
+Responsabilidad:
+
+1. Validar factura
+2. Validar conceptos
+3. Generar incidencias estructuradas
+4. Asignar severidad final
+
+### `src/domain/services/hydrocarbon-classifier.ts`
+
+Responsabilidad:
+
+1. Reconocer hidrocarburos por descripcion y/o clave SAT
+2. Normalizar a `MAGNA`, `PREMIUM` o `DIESEL`
+
+Si no reconoce el concepto, ese concepto no entra a la hoja `Conceptos`.
+
+### `src/application/services/cfdi-transformer.ts`
+
+Responsabilidad:
+
+1. Convertir datos parseados en records de exportacion
+2. Construir `observaciones`
+3. Definir `estatus` de cada concepto exportado
+4. Excluir del listado de `Conceptos` lo que no sea hidrocarburo
+
+### `src/application/use-cases/process-xml-batch.use-case.ts`
+
+Responsabilidad:
+
+1. Procesar todos los XML de una carpeta
+2. Detectar UUID duplicados en el lote
+3. Coordinar parseo, validacion, transformacion y exportacion
+4. Construir el resumen consolidado
+5. Generar logs por archivo
+
+### `src/infrastructure/excel/excel-report.writer.ts`
+
+Responsabilidad:
+
+1. Abrir la plantilla `.xlsx`
+2. Limpiar filas dinamicas
+3. Escribir `Resumen_General`, `Facturas`, `Conceptos` y `Logs`
+4. Pintar filas de `Conceptos` segun severidad
+
+### `src/infrastructure/logging/process-logger.ts`
+
+Responsabilidad:
+
+1. Acumular logs estructurados en memoria
+2. Guardar metadatos utiles por XML
+3. Entregar esos logs al Excel y a la UI
+
+### `src/shared/types.ts`
+
+Contiene los contratos principales:
+
+1. `ValidationSeverity`
+2. `ValidationIssue`
+3. `ParsedFacturaRaw`
+4. `ParsedConceptoRaw`
+5. `FacturaRecord`
+6. `ConceptoRecord`
+7. `ProcessLog`
+8. `ProcessResult`
+
+### `src/shared/constants.ts`
+
+Centraliza constantes como:
+
+1. Nombres de hojas de Excel
+2. Mapeo de celdas fijas de la plantilla
+3. Paleta de colores de severidad para Excel
+4. Palabras clave y claves SAT de hidrocarburos
+
+## Flujo de procesamiento
+
+```text
+Seleccion de carpeta de entrada/salida
+   ↓
+Listado de XML
+   ↓
+Parseo archivo por archivo
+   ↓
+Deteccion de UUID duplicados
+   ↓
+Validacion de factura y conceptos
+   ↓
+Transformacion a records de exportacion
+   ↓
+Filtro de conceptos hidrocarburo
+   ↓
+Construccion de resumen y logs
+   ↓
+Generacion de Excel desde plantilla
 ```
 
----
+## Resumen_General
+
+La hoja `Resumen_General` se calcula en memoria antes de exportar.
+
+Representa el consolidado oficial del reporte volumetrico. Su objetivo es mostrar cantidades y montos acumulados por producto hidrocarburo reconocido.
+
+Se agrupa por:
+
+1. `claveProdServ`
+2. producto normalizado o descripcion fallback
+3. `valorUnitario`
+
+Solo se incluyen conceptos exportados en la hoja `Conceptos` y con estos datos numericos presentes:
+
+1. `cantidad`
+2. `valorUnitario`
+3. `importe`
+4. `IVA`
+5. `total`
+
+Si un concepto hidrocarburo tiene campos numericos `null`, puede aparecer en la hoja `Conceptos`, pero no participa en el consolidado del resumen.
+
+La decision final del resumen usa `Participa en Totales = Si`.
+
+### Columnas del detalle en `Resumen_General`
+
+1. `claveProdServ`: clave SAT del producto consolidado.
+2. `producto`: nombre normalizado del hidrocarburo, normalmente `MAGNA`, `PREMIUM` o `DIESEL`.
+3. `cantidad`: suma de cantidades de los conceptos que participan en totales.
+4. `valorUnitario`: precio unitario del grupo consolidado.
+5. `importe`: suma de importes antes de IVA.
+6. `iva`: suma del IVA de los conceptos incluidos.
+7. `total`: suma total facturada del grupo (`importe + iva`).
+8. `registros`: numero de conceptos que participaron en ese grupo.
+
+## Hoja Facturas
+
+La hoja `Facturas` representa una vista por XML procesado. Cada fila corresponde a un comprobante parseable, incluso si contiene advertencias o errores de validacion.
+
+Columnas actuales esperadas en la plantilla:
+
+1. `archivoXML`
+2. `uuid`
+3. `fecha`
+4. `serie`
+5. `folio`
+6. `formaPago`
+7. `metodoPago`
+8. `moneda`
+9. `version`
+10. `estatus`
+11. `subTotal`
+12. `total`
+
+### Que representa cada columna de `Facturas`
+
+1. `archivoXML`: nombre del archivo procesado.
+2. `uuid`: UUID del timbre fiscal digital.
+3. `fecha`: fecha del comprobante.
+4. `serie`: serie del CFDI.
+5. `folio`: folio del CFDI.
+6. `formaPago`: clave SAT de forma de pago.
+7. `metodoPago`: clave SAT del metodo de pago.
+8. `moneda`: moneda del comprobante, por ejemplo `MXN`.
+9. `version`: version del CFDI detectada en el XML.
+10. `estatus`: severidad final del XML (`OK`, `WARNING`, `ERROR`).
+11. `subTotal`: subtotal del comprobante.
+12. `total`: total del comprobante.
+
+## Hoja Conceptos
+
+La hoja `Conceptos` representa el detalle operativo del reporte. Solo contiene conceptos reconocidos como hidrocarburos por la logica del sistema. La fila puede aparecer aunque tenga incidencias; las incidencias se reflejan en `estatus`, `observaciones` y `Participa en Totales`.
+
+Columnas actuales esperadas en la plantilla:
+
+1. `uuid`
+2. `serie`
+3. `folio`
+4. `fecha`
+5. `claveProdServ`
+6. `descripcion`
+7. `claveUnidad`
+8. `unidad`
+9. `cantidad`
+10. `valorUnitario`
+11. `importe`
+12. `baseIVA`
+13. `tasaIVA`
+14. `IVA`
+15. `total`
+16. `estatus`
+17. `observaciones`
+18. `participaEnTotales`
+
+Solo se exportan conceptos hidrocarburo.
+
+### Que representa cada columna de `Conceptos`
+
+1. `uuid`: UUID del XML al que pertenece el concepto.
+2. `serie`: serie del CFDI origen.
+3. `folio`: folio del CFDI origen.
+4. `fecha`: fecha del comprobante origen.
+5. `claveProdServ`: clave SAT reportada en el concepto.
+6. `descripcion`: descripcion original del concepto en el XML.
+7. `claveUnidad`: clave SAT de unidad.
+8. `unidad`: descripcion de la unidad reportada.
+9. `cantidad`: cantidad del concepto. Puede venir vacia si el XML esta incompleto.
+10. `valorUnitario`: valor unitario del concepto.
+11. `importe`: importe base del concepto.
+12. `baseIVA`: base usada para el traslado de IVA, cuando exista.
+13. `tasaIVA`: tasa de IVA detectada en el traslado.
+14. `IVA`: importe de IVA del concepto.
+15. `total`: total calculado por JavaScript para el concepto (`importe + IVA`) cuando es posible.
+16. `estatus`: severidad final del concepto (`OK`, `WARNING`, `ERROR`).
+17. `observaciones`: listado de incidencias detectadas para ese concepto.
+18. `participaEnTotales`: bandera logica `Si/No`. No elimina la fila ni cambia el XML; solo decide si JavaScript lo toma en cuenta para el resumen.
+
+## Hoja Logs
+
+La hoja `Logs` representa la bitacora de procesamiento. Cada fila resume el resultado de un XML o del proceso global.
+
+Columnas actuales esperadas en la plantilla:
+
+1. `archivoXML`
+2. `estatus`
+3. `mensajePrincipal`
+4. `totalConceptos`
+5. `conceptosIncluidosTotales`
+6. `conceptosExcluidosTotales`
+7. `observacionesGenerales`
+8. `uuid`
+9. `serie`
+10. `folio`
+11. `fecha`
+
+Interpretacion actual de contadores:
+
+1. `totalConceptos`: cantidad total de conceptos parseados desde el XML
+2. `conceptosIncluidosTotales`: cantidad de conceptos hidrocarburo exportados
+3. `conceptosExcluidosTotales`: cantidad de conceptos no hidrocarburo o no exportados al listado final
+
+### Que representa cada columna de `Logs`
+
+1. `archivoXML`: nombre del archivo asociado al log, o `GLOBAL` para el resumen final.
+2. `estatus`: severidad final del XML o del evento registrado.
+3. `mensajePrincipal`: mensaje corto del resultado del procesamiento.
+4. `totalConceptos`: cantidad total de conceptos detectados en el XML.
+5. `conceptosIncluidosTotales`: cantidad de conceptos que finalmente participaron en el reporte de hidrocarburos y en los totales.
+6. `conceptosExcluidosTotales`: cantidad de conceptos detectados que no participaron en el reporte o en totales.
+7. `observacionesGenerales`: detalle general de advertencias o errores del XML.
+8. `uuid`: UUID del XML, si existe.
+9. `serie`: serie del CFDI.
+10. `folio`: folio del CFDI.
+11. `fecha`: fecha y hora del registro de log.
+
+## Colores en Excel
+
+La fila de `Conceptos` se pinta segun `estatus`.
+
+La paleta se define en:
+
+1. `src/shared/constants.ts` mediante `EXCEL_STATUS_FILL_COLORS`
+
+Valores actuales:
+
+1. `OK`: sin color especial
+2. `WARNING`: amarillo mas oscuro suave
+3. `ERROR`: rojo suave
+
+El `writer` solo consume estas constantes; no debe volver a hardcodear colores.
 
 ## Estructura de carpetas
 
 ```text
-xml-volumetricos-electron/
-├─ package.json                          → Dependencias y scripts del proyecto
-├─ tsconfig.json                         → Configuración del compilador TypeScript
-├─ README.md                             → Este archivo
+.
+├─ MANUAL_MANTENIMIENTO.md
+├─ README.md
+├─ package.json
+├─ tsconfig.json
 ├─ scripts/
-│  └─ copy-assets.mjs                    → Copia la plantilla Excel al directorio de build
+│  └─ copy-assets.mjs
 └─ src/
+   ├─ application/
+   │  ├─ services/
+   │  │  └─ cfdi-transformer.ts
+   │  └─ use-cases/
+   │     └─ process-xml-batch.use-case.ts
    ├─ assets/
    │  └─ templates/
-   │     └─ plantilla_XML_volumetricos.xlsx   → Plantilla base del reporte Excel
-   ├─ main/
-   │  └─ main.ts                         → Proceso principal de Electron
-   ├─ preload/
-   │  └─ preload.ts                      → Puente seguro entre UI y sistema
-   ├─ renderer/
-   │  ├─ index.html                      → Estructura HTML de la interfaz
-   │  ├─ styles.css                      → Estilos visuales de la app
-   │  └─ renderer.ts                     → Lógica de la interfaz de usuario
-   ├─ application/
-   │  └─ use-cases/
-   │     └─ process-xml-batch.use-case.ts  → Caso de uso: procesamiento por lotes
    ├─ domain/
    │  ├─ entities/
-   │  │  └─ cfdi.ts                      → Definición de entidad CFDI parseada
+   │  │  └─ cfdi.ts
    │  └─ services/
-   │     └─ hydrocarbon-classifier.ts    → Clasificador de productos hidrocarburo
+   │     ├─ cfdi-validator.ts
+   │     └─ hydrocarbon-classifier.ts
    ├─ infrastructure/
    │  ├─ excel/
-   │  │  └─ excel-report.writer.ts       → Escritura del reporte Excel
+   │  │  └─ excel-report.writer.ts
    │  ├─ fs/
-   │  │  └─ file-system.service.ts       → Operaciones sobre el sistema de archivos
+   │  │  └─ file-system.service.ts
    │  ├─ logging/
-   │  │  └─ process-logger.ts            → Acumulador de logs del proceso
+   │  │  └─ process-logger.ts
    │  └─ xml/
-   │     └─ cfdi-xml.parser.ts           → Parser de archivos XML CFDI
+   │     └─ cfdi-xml.parser.ts
+   ├─ main/
+   │  └─ main.ts
+   ├─ preload/
+   │  └─ preload.ts
+   ├─ renderer/
+   │  ├─ index.html
+   │  ├─ renderer.ts
+   │  └─ styles.css
    └─ shared/
-      ├─ constants.ts                    → Constantes globales de la aplicación
-      └─ types.ts                        → Interfaces y tipos TypeScript compartidos
+      ├─ constants.ts
+      └─ types.ts
 ```
 
----
+## Instalacion y ejecucion
 
-## Descripción de cada archivo
+### Requisitos
 
-### `src/main/main.ts` — Proceso principal
-Es el corazón de Electron. Se encarga de:
-- Crear y gestionar la ventana principal de la aplicación.
-- Exponer los canales IPC que la UI puede invocar:
-  - `dialog:select-input-directory` → abre un diálogo para elegir la carpeta de XMLs.
-  - `dialog:select-output-directory` → abre un diálogo para elegir la carpeta de salida.
-  - `app:get-default-output-directory` → devuelve el Escritorio del usuario como ruta predeterminada.
-  - `process:start` → instancia todos los servicios, ejecuta el caso de uso y devuelve el resultado.
-- Emitir eventos de progreso en tiempo real hacia la interfaz (`process:progress`).
+1. Node.js 18+
+2. npm 9+
 
-### `src/preload/preload.ts` — Puente seguro
-Actúa como intermediario entre la interfaz web y el proceso de Node.js. Usa `contextBridge` de Electron para exponer únicamente las funciones autorizadas al frontend, sin dar acceso directo al sistema operativo. Esto implementa la práctica de seguridad `contextIsolation` recomendada por Electron.
-
-Funciones expuestas en `window.electronAPI`:
-- `selectInputDirectory()` → seleccionar carpeta de entrada
-- `selectOutputDirectory()` → seleccionar carpeta de salida
-- `getDefaultOutputDirectory()` → obtener ruta de salida predeterminada
-- `startProcess(payload)` → iniciar el procesamiento
-- `onProgress(callback)` → suscribirse a eventos de progreso
-
-### `src/renderer/index.html` + `renderer.ts` + `styles.css` — Interfaz de usuario
-La pantalla visual de la app. Permite al usuario:
-1. Seleccionar la carpeta con los XMLs de entrada.
-2. Seleccionar la carpeta de salida del Excel.
-3. Iniciar el proceso con un botón.
-4. Ver la barra de progreso en tiempo real.
-5. Ver un log en pantalla con el resultado de cada archivo procesado.
-
-### `src/application/use-cases/process-xml-batch.use-case.ts` — Caso de uso principal
-Orquesta todo el flujo de negocio:
-1. Lista todos los archivos `.xml` de la carpeta seleccionada.
-2. Los procesa uno a uno, notificando el progreso en cada paso.
-3. Si un XML falla, lo registra en el log de errores y continúa con el siguiente.
-4. Agrupa y consolida los conceptos por producto hidrocarburo para el resumen.
-5. Llama al escritor de Excel para generar el archivo final.
-
-### `src/domain/entities/cfdi.ts` — Entidad CFDI
-Define la estructura de datos de una factura CFDI ya parseada. El objeto `ParsedCfdi` contiene:
-- `factura` (`FacturaRecord`): cabecera del comprobante.
-- `conceptos` (`ConceptoRecord[]`): líneas de productos detectados como hidrocarburos.
-
-### `src/domain/services/hydrocarbon-classifier.ts` — Clasificador de hidrocarburos
-Contiene la regla de negocio clave: determina si un concepto de factura corresponde a MAGNA, PREMIUM o DIESEL. Lo hace revisando tanto la **descripción** del producto como la **ClaveProdServ** del catálogo del SAT:
-
-| Producto | ClaveProdServ SAT | Palabra clave en descripción |
-|---|---|---|
-| MAGNA | `15101514` | `MAGNA` |
-| PREMIUM | `15101515` | `PREMIUM` |
-| DIESEL | `15101505` | `DIESEL` |
-
-Si el concepto no coincide con ningún hidrocarburo reconocido, se descarta y no aparece en el reporte.
-
-### `src/infrastructure/xml/cfdi-xml.parser.ts` — Parser de XML CFDI
-Lee físicamente cada archivo XML y lo convierte en objetos TypeScript. Extrae:
-
-**Del comprobante (cabecera):** UUID del timbre fiscal, fecha, serie, folio, forma de pago, método de pago, moneda, subtotal y total.
-
-**De cada concepto:** ClaveProdServ, descripción, clave de unidad, unidad, cantidad, valor unitario e importe.
-
-Ignora automáticamente los namespaces XML para garantizar compatibilidad con distintos emisores de CFDI.
-
-### `src/infrastructure/excel/excel-report.writer.ts` — Escritor de Excel
-Toma la plantilla Excel del proyecto, la carga en memoria, limpia el contenido dinámico anterior y escribe los nuevos datos en cuatro hojas:
-- **Resumen_General**: fecha de generación (`A4`), total de XMLs procesados (`C4`), total con error (`E4`), y tabla consolidada por producto desde la fila 7.
-- **Facturas**: una fila por comprobante desde la fila 2.
-- **Conceptos**: una fila por concepto de hidrocarburo desde la fila 2.
-- **Logs**: registro de eventos del proceso desde la fila 2.
-
-El archivo de salida se nombra `XML_Volumetricos_DDMMYYHHMMSS.xlsx` y se guarda en la carpeta elegida por el usuario.
-
-### `src/infrastructure/fs/file-system.service.ts` — Servicio de archivos
-Encapsula las operaciones sobre el sistema de archivos:
-- `listXmlFiles(dir)`: lista y ordena alfabéticamente todos los `.xml` de una carpeta.
-- `ensureDirectory(dir)`: crea la carpeta de salida si no existe.
-- `exists(path)`: verifica si un archivo o carpeta existe.
-
-### `src/infrastructure/logging/process-logger.ts` — Logger del proceso
-Acumula en memoria los registros de log durante la ejecución. Cada entrada guarda:
-- Nombre del archivo XML involucrado
-- Fecha y hora del evento
-- Nivel: `INFO`, `WARNING` o `ERROR`
-- Mensaje y detalle
-
-Al finalizar el proceso, los logs se escriben en la hoja "Logs" del Excel.
-
-### `src/shared/types.ts` — Tipos compartidos
-Define todas las interfaces TypeScript del proyecto que son usadas por múltiples capas:
-- `FacturaRecord`: datos de la cabecera de un comprobante.
-- `ConceptoRecord`: datos de una línea de producto.
-- `ResumenRecord`: totales agregados por producto hidrocarburo.
-- `ProcessLog`: entrada individual del log.
-- `ProcessResult`: resultado completo devuelto al finalizar.
-- `ProcessProgress`: progreso actual para actualizar la barra en pantalla.
-
-### `src/shared/constants.ts` — Constantes globales
-Centraliza todos los valores fijos de la aplicación:
-- Nombre de las hojas del Excel (`Resumen_General`, `Facturas`, `Conceptos`, `Logs`).
-- Mapeo de celdas de la plantilla (`A4`, `C4`, `E4`, filas de inicio por hoja).
-- Carpeta de salida predeterminada (Escritorio del usuario).
-- Palabras clave y claves SAT que identifican los hidrocarburos.
-
-### `src/assets/templates/plantilla_XML_volumetricos.xlsx` — Plantilla Excel
-Archivo Excel base con el formato, estilos y encabezados ya definidos. La aplicación la carga como punto de partida, escribe los datos sobre ella y guarda el resultado como un archivo nuevo con nombre único (timestamp). **No se sobreescribe la plantilla original.**
-
-### `scripts/copy-assets.mjs` — Script de build
-Script auxiliar que se ejecuta después de compilar TypeScript. Copia la plantilla Excel desde `src/assets/` hacia `dist/assets/` para que quede disponible cuando la aplicación Electron se ejecuta desde la carpeta de distribución.
-
----
-
-## Flujo completo
-
-```
-Usuario selecciona carpeta de XMLs y carpeta de salida
-                    ↓
-     renderer.ts invoca window.electronAPI.startProcess()
-                    ↓
-     preload.ts reenvía la llamada vía ipcRenderer.invoke()
-                    ↓
-        main.ts recibe el evento 'process:start'
-                    ↓
-   ProcessXmlBatchUseCase.execute() orquesta el proceso
-                    ↓
-     FileSystemService lista todos los .xml de la carpeta
-                    ↓
-       Por cada XML → CfdiXmlParser.parse() lo lee
-                    ↓
-  HydrocarbonClassifier filtra solo MAGNA / PREMIUM / DIESEL
-                    ↓
-     Se acumulan facturas, conceptos, resumen y logs
-                    ↓
-   ExcelReportWriter.write() genera el .xlsx desde la plantilla
-                    ↓
-  El archivo queda guardado como XML_Volumetricos_DDMMYYHHMMSS.xlsx
-                    ↓
-    La interfaz muestra el resumen y el log al usuario
-```
-
----
-
-## Instalación y ejecución
-
-### Requisitos previos
-- Node.js 18 o superior
-- npm 9 o superior
-
-### Pasos
+### Comandos
 
 ```bash
-# 1. Instalar dependencias
 npm install
-
-# 2. Compilar y ejecutar
-npm start
+npm run build
+npm run dev
 ```
 
-### Scripts disponibles
+Scripts disponibles:
 
-| Script | Descripción |
-|---|---|
-| `npm run build` | Compila TypeScript y copia los assets al directorio `dist/` |
-| `npm start` | Compila y lanza la aplicación Electron |
-| `npm run dev` | Igual que `start`, útil durante desarrollo |
-
----
+1. `npm run build`: compila TypeScript y copia assets a `dist`
+2. `npm run dev`: compila y abre Electron
+3. `npm start`: equivalente de arranque para ejecucion normal
 
 ## Plantilla Excel
 
-La plantilla debe estar ubicada en:
+La plantilla base debe existir en:
 
 ```text
 src/assets/templates/plantilla_XML_volumetricos.xlsx
 ```
 
-La plantilla debe contener exactamente las siguientes hojas con estos nombres:
+Debe contener exactamente estas hojas:
 
-| Nombre de hoja | Descripción |
-|---|---|
-| `Resumen_General` | Resumen de totales por hidrocarburo |
-| `Facturas` | Detalle de comprobantes |
-| `Conceptos` | Detalle de conceptos por hidrocarburo |
-| `Logs` | Registro del proceso |
+1. `Resumen_General`
+2. `Facturas`
+3. `Conceptos`
+4. `Logs`
 
-Celdas fijas usadas en `Resumen_General`:
+Celdas fijas usadas actualmente en `Resumen_General`:
 
-| Celda | Valor escrito |
-|---|---|
-| `A4` | Fecha y hora de generación |
-| `C4` | Total de XMLs procesados |
-| `E4` | Total de XMLs con error |
+1. `A4`: fecha de generacion
+2. `C4`: total de XML procesados
+3. `E4`: total de XML con error
 
----
+Las filas de detalle se escriben desde estas posiciones:
 
-## Notas importantes
+1. `Resumen_General`: fila `9`
+2. `Facturas`: fila `2`
+3. `Conceptos`: fila `2`
+4. `Logs`: fila `2`
 
-- La aplicación **no modifica** la plantilla original; siempre genera un archivo nuevo.
-- Los conceptos que **no sean hidrocarburos** (MAGNA, PREMIUM, DIESEL) son ignorados y no aparecen en el reporte.
-- Si un XML no puede parsearse (archivo corrupto, formato incorrecto, etc.), el error se registra en la hoja `Logs` y el proceso **continúa con el siguiente archivo**.
-- El archivo de salida se nombra con timestamp (`DDMMYYHHMMSS`) para evitar sobreescrituras accidentales.
-- La detección de hidrocarburo se realiza por **descripción** del concepto y/o por **ClaveProdServ** del catálogo del SAT.
+## Notas operativas importantes
+
+1. La plantilla original no se sobrescribe; el sistema genera un archivo nuevo.
+2. La aplicacion continua procesando aunque un XML falle.
+3. La hoja `Conceptos` no es un volcado total del CFDI; es un subconjunto de hidrocarburos.
+4. Un concepto hidrocarburo con errores puede seguir siendo visible en el Excel.
+5. El resumen consolidado puede omitir conceptos visibles si les faltan valores numericos requeridos.
+
+## Recomendacion de uso
+
+Para cambios funcionales, revisar tambien:
+
+1. `MANUAL_MANTENIMIENTO.md`
