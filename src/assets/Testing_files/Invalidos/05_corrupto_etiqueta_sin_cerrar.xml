@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+                  Version="4.0"
+                  Serie="E"
+                  Folio="1005"
+                  Fecha="2026-03-13T14:00:00"
+                  SubTotal="60.00"
+                  Moneda="MXN"
+                  Total="69.60"
+                  TipoDeComprobante="I">
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="2.5"
+                   ClaveProdServ="15101514"
+                   ClaveUnidad="LTR"
+                   Descripcion="MAGNA"
+                   Importe="60.00"
+                   ObjetoImp="02"
+                   Unidad="Litro"
+                   ValorUnitario="24.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="60.00"
+                          Importe="9.60"
+                          Impuesto="002"
+                          TasaOCuota="0.160000"
+                          TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    <!-- Falta cerrar cfdi:Concepto, cfdi:Conceptos y cfdi:Comprobante -->

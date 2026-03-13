@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<abc:Comprobante xmlns:abc="http://www.sat.gob.mx/cfd/4" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+    Version="4.0" Serie="Z" Folio="2007" Fecha="2026-03-13T16:30:00" SubTotal="60.00" Moneda="MXN" Total="69.60" TipoDeComprobante="I" MetodoPago="PUE" FormaPago="01">
+  <abc:Conceptos>
+    <abc:Concepto Cantidad="3.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="60.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.000000">
+      <abc:Impuestos><abc:Traslados><abc:Traslado Base="60.00" Importe="9.60" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></abc:Traslados></abc:Impuestos>
+    </abc:Concepto>
+  </abc:Conceptos>
+  <abc:Complemento><tfd:TimbreFiscalDigital UUID="77770000-0000-0000-0000-000000000007"/></abc:Complemento>
+</abc:Comprobante>

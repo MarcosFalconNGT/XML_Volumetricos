@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4"
+                  xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+                  Version="4.0"
+                  Serie="D"
+                  Folio="1004"
+                  Fecha="2026-03-13T13:00:00"
+                  SubTotal="50.00"
+                  Moneda="MXN"
+                  Total="50.00"
+                  TipoDeComprobante="I"
+                  MetodoPago="PUE"
+                  FormaPago="01">
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="2.000000"
+                   ClaveProdServ="15101514"
+                   ClaveUnidad="LTR"
+                   Descripcion="MAGNA"
+                   Importe="50.00"
+                   ObjetoImp="01"
+                   Unidad="Litro"
+                   ValorUnitario="25.000000"/>
+  </cfdi:Conceptos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital UUID="44444444-4444-4444-4444-444444444444"/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

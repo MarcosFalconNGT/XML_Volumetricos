@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+    Version="4.0" Serie="Q" Folio="2018" Fecha="2026-03-13T17:22:00" SubTotal="4010.00" Moneda="MXN" Total="4651.60" TipoDeComprobante="I" MetodoPago="PUE" FormaPago="01">
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="10.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="10.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="10.10" Importe="1.62" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="10.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="10.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="10.20" Importe="1.63" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="10.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="10.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="10.30" Importe="1.65" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="10.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="10.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="10.40" Importe="1.66" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="10.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="10.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="10.50" Importe="1.68" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="10.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="10.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="10.60" Importe="1.70" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="10.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="10.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="10.70" Importe="1.71" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="10.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="10.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="10.80" Importe="1.73" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="10.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="10.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="10.90" Importe="1.74" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="11.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="11.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="11.00" Importe="1.76" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="11.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="11.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="11.10" Importe="1.78" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="11.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="11.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="11.20" Importe="1.79" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="11.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="11.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="11.30" Importe="1.81" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="11.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="11.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="11.40" Importe="1.82" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="11.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="11.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="11.50" Importe="1.84" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="11.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="11.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="11.60" Importe="1.86" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="11.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="11.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="11.70" Importe="1.87" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="11.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="11.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="11.80" Importe="1.89" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="11.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="11.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="11.90" Importe="1.90" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="12.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="12.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="12.00" Importe="1.92" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="12.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="12.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="12.10" Importe="1.94" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="12.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="12.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="12.20" Importe="1.95" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="12.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="12.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="12.30" Importe="1.97" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="12.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="12.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="12.40" Importe="1.98" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="12.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="12.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="12.50" Importe="2.00" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="12.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="12.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="12.60" Importe="2.02" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="12.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="12.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="12.70" Importe="2.03" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="12.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="12.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="12.80" Importe="2.05" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="12.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="12.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="12.90" Importe="2.06" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="13.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="13.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="13.00" Importe="2.08" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="13.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="13.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="13.10" Importe="2.10" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="13.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="13.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="13.20" Importe="2.11" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="13.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="13.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="13.30" Importe="2.13" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="13.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="13.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="13.40" Importe="2.14" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="13.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="13.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="13.50" Importe="2.16" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="13.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="13.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="13.60" Importe="2.18" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="13.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="13.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="13.70" Importe="2.19" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="13.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="13.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="13.80" Importe="2.21" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="13.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="13.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="13.90" Importe="2.22" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="14.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="14.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="14.00" Importe="2.24" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="14.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="14.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="14.10" Importe="2.26" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="14.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="14.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="14.20" Importe="2.27" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="14.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="14.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="14.30" Importe="2.29" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="14.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="14.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="14.40" Importe="2.30" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="14.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="14.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="14.50" Importe="2.32" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="14.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="14.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="14.60" Importe="2.34" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="14.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="14.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="14.70" Importe="2.35" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="14.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="14.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="14.80" Importe="2.37" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="14.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="14.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="14.90" Importe="2.38" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="15.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="15.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="15.00" Importe="2.40" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="15.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="15.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="15.10" Importe="2.42" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="15.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="15.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="15.20" Importe="2.43" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="15.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="15.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="15.30" Importe="2.45" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="15.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="15.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="15.40" Importe="2.46" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="15.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="15.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="15.50" Importe="2.48" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="15.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="15.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="15.60" Importe="2.50" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="15.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="15.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="15.70" Importe="2.51" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="15.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="15.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="15.80" Importe="2.53" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="15.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="15.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="15.90" Importe="2.54" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="16.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="16.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="16.00" Importe="2.56" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="16.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="16.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="16.10" Importe="2.58" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="16.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="16.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="16.20" Importe="2.59" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="16.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="16.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="16.30" Importe="2.61" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="16.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="16.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="16.40" Importe="2.62" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="16.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="16.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="16.50" Importe="2.64" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="16.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="16.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="16.60" Importe="2.66" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="16.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="16.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="16.70" Importe="2.67" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="16.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="16.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="16.80" Importe="2.69" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="16.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="16.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="16.90" Importe="2.70" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="17.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="17.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="17.00" Importe="2.72" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="17.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="17.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="17.10" Importe="2.74" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="17.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="17.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="17.20" Importe="2.75" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="17.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="17.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="17.30" Importe="2.77" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="17.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="17.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="17.40" Importe="2.78" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="17.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="17.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="17.50" Importe="2.80" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="17.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="17.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="17.60" Importe="2.82" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="17.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="17.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="17.70" Importe="2.83" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="17.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="17.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="17.80" Importe="2.85" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="17.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="17.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="17.90" Importe="2.86" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="18.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="18.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="18.00" Importe="2.88" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="18.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="18.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="18.10" Importe="2.90" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="18.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="18.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="18.20" Importe="2.91" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="18.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="18.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="18.30" Importe="2.93" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="18.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="18.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="18.40" Importe="2.94" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="18.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="18.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="18.50" Importe="2.96" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="18.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="18.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="18.60" Importe="2.98" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="18.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="18.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="18.70" Importe="2.99" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="18.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="18.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="18.80" Importe="3.01" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="18.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="18.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="18.90" Importe="3.02" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="19.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="19.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="19.00" Importe="3.04" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="19.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="19.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="19.10" Importe="3.06" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="19.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="19.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="19.20" Importe="3.07" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="19.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="19.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="19.30" Importe="3.09" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="19.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="19.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="19.40" Importe="3.10" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="19.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="19.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="19.50" Importe="3.12" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="19.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="19.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="19.60" Importe="3.14" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="19.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="19.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="19.70" Importe="3.15" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="19.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="19.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="19.80" Importe="3.17" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="19.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="19.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="19.90" Importe="3.18" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="20.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="20.00" Importe="3.20" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="20.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="20.10" Importe="3.22" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="20.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="20.20" Importe="3.23" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="20.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="20.30" Importe="3.25" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="20.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="20.40" Importe="3.26" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="20.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="20.50" Importe="3.28" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="20.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="20.60" Importe="3.30" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="20.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="20.70" Importe="3.31" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="20.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="20.80" Importe="3.33" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="20.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="20.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="20.90" Importe="3.34" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="21.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="21.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="21.00" Importe="3.36" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="21.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="21.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="21.10" Importe="3.38" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="21.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="21.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="21.20" Importe="3.39" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="21.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="21.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="21.30" Importe="3.41" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="21.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="21.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="21.40" Importe="3.42" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="21.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="21.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="21.50" Importe="3.44" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="21.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="21.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="21.60" Importe="3.46" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="21.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="21.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="21.70" Importe="3.47" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="21.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="21.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="21.80" Importe="3.49" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="21.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="21.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="21.90" Importe="3.50" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="22.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="22.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="22.00" Importe="3.52" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="22.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="22.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="22.10" Importe="3.54" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="22.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="22.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="22.20" Importe="3.55" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="22.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="22.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="22.30" Importe="3.57" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="22.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="22.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="22.40" Importe="3.58" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="22.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="22.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="22.50" Importe="3.60" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="22.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="22.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="22.60" Importe="3.62" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="22.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="22.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="22.70" Importe="3.63" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="22.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="22.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="22.80" Importe="3.65" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="22.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="22.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="22.90" Importe="3.66" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="23.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="23.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="23.00" Importe="3.68" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="23.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="23.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="23.10" Importe="3.70" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="23.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="23.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="23.20" Importe="3.71" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="23.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="23.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="23.30" Importe="3.73" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="23.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="23.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="23.40" Importe="3.74" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="23.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="23.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="23.50" Importe="3.76" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="23.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="23.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="23.60" Importe="3.78" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="23.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="23.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="23.70" Importe="3.79" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="23.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="23.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="23.80" Importe="3.81" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="23.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="23.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="23.90" Importe="3.82" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="24.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="24.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="24.00" Importe="3.84" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="24.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="24.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="24.10" Importe="3.86" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="24.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="24.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="24.20" Importe="3.87" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="24.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="24.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="24.30" Importe="3.89" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="24.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="24.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="24.40" Importe="3.90" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="24.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="24.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="24.50" Importe="3.92" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="24.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="24.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="24.60" Importe="3.94" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="24.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="24.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="24.70" Importe="3.95" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="24.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="24.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="24.80" Importe="3.97" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="24.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="24.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="24.90" Importe="3.98" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="25.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="25.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="25.00" Importe="4.00" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="25.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="25.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="25.10" Importe="4.02" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="25.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="25.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="25.20" Importe="4.03" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="25.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="25.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="25.30" Importe="4.05" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="25.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="25.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="25.40" Importe="4.06" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="25.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="25.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="25.50" Importe="4.08" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="25.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="25.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="25.60" Importe="4.10" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="25.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="25.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="25.70" Importe="4.11" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="25.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="25.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="25.80" Importe="4.13" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="25.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="25.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="25.90" Importe="4.14" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="26.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="26.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="26.00" Importe="4.16" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="26.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="26.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="26.10" Importe="4.18" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="26.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="26.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="26.20" Importe="4.19" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="26.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="26.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="26.30" Importe="4.21" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="26.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="26.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="26.40" Importe="4.22" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="26.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="26.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="26.50" Importe="4.24" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="26.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="26.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="26.60" Importe="4.26" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="26.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="26.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="26.70" Importe="4.27" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="26.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="26.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="26.80" Importe="4.29" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="26.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="26.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="26.90" Importe="4.30" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="27.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="27.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="27.00" Importe="4.32" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="27.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="27.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="27.10" Importe="4.34" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="27.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="27.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="27.20" Importe="4.35" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="27.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="27.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="27.30" Importe="4.37" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="27.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="27.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="27.40" Importe="4.38" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="27.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="27.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="27.50" Importe="4.40" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="27.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="27.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="27.60" Importe="4.42" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="27.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="27.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="27.70" Importe="4.43" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="27.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="27.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="27.80" Importe="4.45" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="27.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="27.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="27.90" Importe="4.46" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="28.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="28.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="28.00" Importe="4.48" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="28.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="28.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="28.10" Importe="4.50" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="28.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="28.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="28.20" Importe="4.51" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="28.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="28.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="28.30" Importe="4.53" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="28.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="28.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="28.40" Importe="4.54" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="28.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="28.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="28.50" Importe="4.56" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="28.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="28.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="28.60" Importe="4.58" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="28.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="28.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="28.70" Importe="4.59" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="28.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="28.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="28.80" Importe="4.61" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="28.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="28.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="28.90" Importe="4.62" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="29.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="29.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="29.00" Importe="4.64" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="29.10" ObjetoImp="02" Unidad="Litro" ValorUnitario="29.10">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="29.10" Importe="4.66" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="29.20" ObjetoImp="02" Unidad="Litro" ValorUnitario="29.20">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="29.20" Importe="4.67" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="29.30" ObjetoImp="02" Unidad="Litro" ValorUnitario="29.30">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="29.30" Importe="4.69" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="29.40" ObjetoImp="02" Unidad="Litro" ValorUnitario="29.40">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="29.40" Importe="4.70" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="29.50" ObjetoImp="02" Unidad="Litro" ValorUnitario="29.50">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="29.50" Importe="4.72" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="29.60" ObjetoImp="02" Unidad="Litro" ValorUnitario="29.60">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="29.60" Importe="4.74" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="29.70" ObjetoImp="02" Unidad="Litro" ValorUnitario="29.70">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="29.70" Importe="4.75" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="29.80" ObjetoImp="02" Unidad="Litro" ValorUnitario="29.80">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="29.80" Importe="4.77" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101515" ClaveUnidad="LTR" Descripcion="PREMIUM" Importe="29.90" ObjetoImp="02" Unidad="Litro" ValorUnitario="29.90">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="29.90" Importe="4.78" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" ClaveProdServ="15101514" ClaveUnidad="LTR" Descripcion="MAGNA" Importe="30.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="30.00">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="30.00" Importe="4.80" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Complemento><tfd:TimbreFiscalDigital UUID="18180000-0000-0000-0000-000000000018"/></cfdi:Complemento>
+</cfdi:Comprobante>

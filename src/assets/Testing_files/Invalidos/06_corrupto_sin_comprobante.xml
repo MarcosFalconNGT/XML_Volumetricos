@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Documento xmlns:cfdi="http://www.sat.gob.mx/cfd/4">
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1.0"
+                   ClaveProdServ="15101515"
+                   ClaveUnidad="LTR"
+                   Descripcion="PREMIUM"
+                   Importe="30.00"
+                   ObjetoImp="02"
+                   Unidad="Litro"
+                   ValorUnitario="30.00"/>
+  </cfdi:Conceptos>
+</Documento>

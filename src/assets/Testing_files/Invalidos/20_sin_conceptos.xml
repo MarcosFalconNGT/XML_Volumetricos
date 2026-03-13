@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+    Version="4.0" Serie="Q" Folio="2020" Fecha="2026-03-13T17:30:00" SubTotal="0.00" Moneda="MXN" Total="0.00" TipoDeComprobante="I" MetodoPago="PUE" FormaPago="01">
+  <cfdi:Complemento><tfd:TimbreFiscalDigital UUID="20200000-0000-0000-0000-000000000020"/></cfdi:Complemento>
+</cfdi:Comprobante>

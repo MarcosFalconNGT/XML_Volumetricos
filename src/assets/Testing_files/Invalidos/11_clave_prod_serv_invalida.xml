@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"
+    Version="4.0" Serie="Z" Folio="2011" Fecha="2026-03-13T16:50:00" SubTotal="45.00" Moneda="MXN" Total="52.20" TipoDeComprobante="I" MetodoPago="PUE" FormaPago="01">
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1.500000" ClaveProdServ="99999999" ClaveUnidad="LTR" Descripcion="PRODUCTO DESCONOCIDO" Importe="45.00" ObjetoImp="02" Unidad="Litro" ValorUnitario="30.000000">
+      <cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="45.00" Importe="7.20" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa"/></cfdi:Traslados></cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Complemento><tfd:TimbreFiscalDigital UUID="11110000-0000-0000-0000-000000000011"/></cfdi:Complemento>
+</cfdi:Comprobante>
