@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XML Volumétricos</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Procesador XML Volumétricos</h1>
+      <p>Selecciona la carpeta de XML, la ruta de salida y genera el Excel.</p>
+    </header>
+
+    <section class="card">
+      <div class="field-row">
+        <label for="inputDir">Carpeta de XML</label>
+        <div class="input-group">
+          <input id="inputDir" type="text" readonly />
+          <button id="selectInputBtn" type="button">Seleccionar</button>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <label for="outputDir">Ruta de salida</label>
+        <div class="input-group">
+          <input id="outputDir" type="text" readonly />
+          <button id="selectOutputBtn" type="button">Seleccionar</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="startBtn" type="button">Procesar XML</button>
+      </div>
+
+      <div class="progress-wrapper">
+        <progress id="progressBar" value="0" max="100"></progress>
+        <span id="progressText">Esperando ejecución...</span>
+      </div>
+    </section>
+
+    <section class="card logs-card">
+      <h2>Mensajes del proceso</h2>
+      <pre id="logsPanel"></pre>
+    </section>
+  </main>
+
+  <script src="./renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "xml-volumetricos-electron",
+  "version": "1.0.0",
+  "description": "Procesador masivo de XML CFDI a Excel para volum\u00e9tricos.",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "build": "tsc && node scripts/copy-assets.mjs",
+    "start": "npm run build && electron .",
+    "dev": "npm run build && electron ."
+  },
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "exceljs": "^4.4.0",
+    "fast-xml-parser": "^4.5.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "electron": "^35.1.5",
+    "typescript": "^5.8.2"
+  }
+}
