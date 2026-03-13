@@ -15,12 +15,12 @@ export interface ExcelWritePayload {
   totalXmlError: number;
 }
 
-const START_ROWS = {
-  RESUMEN: 7,
-  FACTURAS: 2,
-  CONCEPTOS: 2,
-  LOGS: 2,
-};
+// const START_ROWS = {
+//   RESUMEN: 7,
+//   FACTURAS: 2,
+//   CONCEPTOS: 2,
+//   LOGS: 2,
+// };
 
 export class ExcelReportWriter {
   public async write(payload: ExcelWritePayload): Promise<string> {
@@ -37,10 +37,10 @@ export class ExcelReportWriter {
     }
 
     // Limpiar contenido dinámico antes de escribir
-    this.clearWorksheetRows(resumenSheet, START_ROWS.RESUMEN);
-    this.clearWorksheetRows(facturasSheet, START_ROWS.FACTURAS);
-    this.clearWorksheetRows(conceptosSheet, START_ROWS.CONCEPTOS);
-    this.clearWorksheetRows(logsSheet, START_ROWS.LOGS);
+    this.clearWorksheetRows(resumenSheet, CELL_MAP.RESUMEN_START_ROW);
+    this.clearWorksheetRows(facturasSheet, CELL_MAP.FACTURAS_START_ROW);
+    this.clearWorksheetRows(conceptosSheet, CELL_MAP.CONCEPTOS_START_ROW);
+    this.clearWorksheetRows(logsSheet, CELL_MAP.LOGS_START_ROW);
 
     // Escribir resumen superior
     resumenSheet.getCell(CELL_MAP.FECHA_GENERACION).value = format(new Date(), 'dd/MM/yyyy HH:mm:ss');
@@ -61,16 +61,18 @@ export class ExcelReportWriter {
   }
 
   private fillResumenRows(sheet: ExcelJS.Worksheet, rows: ResumenRecord[]): void {
-    let rowIndex = START_ROWS.RESUMEN;
+    let rowIndex = CELL_MAP.RESUMEN_START_ROW;
 
     for (const row of rows) {
-      this.copyRowStyle(sheet, START_ROWS.RESUMEN, rowIndex);
+      this.copyRowStyle(sheet, CELL_MAP.RESUMEN_START_ROW, rowIndex);
       this.writeRow(sheet, rowIndex, [
         row.claveProdServ,
         row.producto,
         row.cantidad,
         row.valorUnitario,
         row.importe,
+        row.iva,
+        row.total,
         row.registros,
       ]);
       rowIndex++;
@@ -78,10 +80,10 @@ export class ExcelReportWriter {
   }
 
   private fillFacturasRows(sheet: ExcelJS.Worksheet, rows: FacturaRecord[]): void {
-    let rowIndex = START_ROWS.FACTURAS;
+    let rowIndex = CELL_MAP.FACTURAS_START_ROW;
 
     for (const row of rows) {
-      this.copyRowStyle(sheet, START_ROWS.FACTURAS, rowIndex);
+      this.copyRowStyle(sheet, CELL_MAP.FACTURAS_START_ROW, rowIndex);
       this.writeRow(sheet, rowIndex, [
         row.archivoXML,
         row.uuid,
@@ -99,12 +101,12 @@ export class ExcelReportWriter {
   }
 
   private fillConceptosRows(sheet: ExcelJS.Worksheet, rows: ConceptoRecord[]): void {
-    let rowIndex = START_ROWS.CONCEPTOS;
+    let rowIndex = CELL_MAP.CONCEPTOS_START_ROW;
 
     for (const row of rows) {
-      this.copyRowStyle(sheet, START_ROWS.CONCEPTOS, rowIndex);
+      this.copyRowStyle(sheet, CELL_MAP.CONCEPTOS_START_ROW, rowIndex);
       this.writeRow(sheet, rowIndex, [
-        row.archivoXML,
+        row.uuid,
         row.serie,
         row.folio,
         row.fecha,
@@ -115,16 +117,20 @@ export class ExcelReportWriter {
         row.cantidad,
         row.valorUnitario,
         row.importe,
+        row.baseIVA,
+        row.tasaIVA,
+        row.IVA,
+        row.total,
       ]);
       rowIndex++;
     }
   }
 
   private fillLogsRows(sheet: ExcelJS.Worksheet, rows: ProcessLog[]): void {
-    let rowIndex = START_ROWS.LOGS;
+    let rowIndex = CELL_MAP.LOGS_START_ROW;
 
     for (const row of rows) {
-      this.copyRowStyle(sheet, START_ROWS.LOGS, rowIndex);
+      this.copyRowStyle(sheet, CELL_MAP.LOGS_START_ROW, rowIndex);
       this.writeRow(sheet, rowIndex, [
         row.archivoXML,
         row.fecha,

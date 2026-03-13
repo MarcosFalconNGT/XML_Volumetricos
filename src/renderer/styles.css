@@ -57,7 +57,28 @@ progress {
   width: 100%;
   height: 18px;
 }
+.logs-card > summary {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+}
+.logs-card > summary::before {
+  content: '▶';
+  font-size: 0.75rem;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.logs-card[open] > summary::before {
+  transform: rotate(90deg);
+}
+.logs-card > summary::-webkit-details-marker { display: none; }
 .logs-card pre {
+  margin-top: 14px;
   background: #0f172a;
   color: #e2e8f0;
   padding: 16px;

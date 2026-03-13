@@ -93,6 +93,8 @@ export class ProcessXmlBatchUseCase {
       if (existing) {
         existing.cantidad += concepto.cantidad;
         existing.importe += concepto.importe;
+        existing.iva += concepto.IVA;
+        existing.total += concepto.total;
         existing.registros += 1;
         continue;
       }
@@ -103,6 +105,8 @@ export class ProcessXmlBatchUseCase {
         cantidad: concepto.cantidad,
         valorUnitario: concepto.valorUnitario,
         importe: concepto.importe,
+        iva: concepto.IVA,
+        total: concepto.total,
         registros: 1,
       });
     }

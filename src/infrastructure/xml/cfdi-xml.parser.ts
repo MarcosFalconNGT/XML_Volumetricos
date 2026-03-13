@@ -55,14 +55,14 @@ export class CfdiXmlParser {
     };
 
     const conceptos = conceptosArray
-      .map((concepto) => this.mapConcepto(archivoXML, serie, folio, fecha, concepto as CfdiNode))
+      .map((concepto) => this.mapConcepto(tfd, serie, folio, fecha, concepto as CfdiNode))
       .filter((item): item is ConceptoRecord => item !== null);
 
     return { factura, conceptos };
   }
 
   private mapConcepto(
-    archivoXML: string,
+    uuid: string,
     serie: string,
     folio: string,
     fecha: string,
@@ -76,8 +76,11 @@ export class CfdiXmlParser {
       return null;
     }
 
+    const impuestos = this.extractConceptIva(concepto);
+    const importe = this.getNumber(concepto.Importe);
+
     return {
-      archivoXML,
+      uuid,
       serie,
       folio,
       fecha,
@@ -87,7 +90,12 @@ export class CfdiXmlParser {
       unidad: this.getString(concepto.Unidad),
       cantidad: this.getNumber(concepto.Cantidad),
       valorUnitario: this.getNumber(concepto.ValorUnitario),
-      importe: this.getNumber(concepto.Importe),
+      importe,
+
+      baseIVA: impuestos.baseIva,
+      tasaIVA: impuestos.tasaIva,
+      IVA: impuestos.iva,
+      total: importe + impuestos.iva,
     };
   }
 
@@ -100,6 +108,42 @@ export class CfdiXmlParser {
 
     return timbre ? this.getString(timbre.UUID) : '';
   }
+
+  private extractConceptIva(concepto: CfdiNode): {
+    baseIva: number;
+    tasaIva: number;
+    iva: number;
+  } {
+    const impuestosNode = concepto.Impuestos as CfdiNode | undefined;
+    const trasladosNode = (impuestosNode?.Traslados as CfdiNode | undefined)?.Traslado;
+
+    const traslados = Array.isArray(trasladosNode)
+      ? trasladosNode
+      : trasladosNode
+        ? [trasladosNode]
+        : [];
+
+    let baseIva = 0;
+    let tasaIva = 0;
+    let iva = 0;
+
+    for (const traslado of traslados as CfdiNode[]) {
+      const impuesto = this.getString(traslado.Impuesto);
+
+      if (impuesto === '002') {
+        baseIva += this.getNumber(traslado.Base);
+        iva += this.getNumber(traslado.Importe);
+        tasaIva = this.getNumber(traslado.TasaOCuota);
+      }
+    }
+
+    return {
+      baseIva,
+      tasaIva,
+      iva,
+    };
+  }
+
 
   private getString(value: unknown): string {
     return value == null ? '' : String(value).trim();

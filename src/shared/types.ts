@@ -22,7 +22,7 @@ export interface FacturaRecord {
 }
 
 export interface ConceptoRecord {
-  archivoXML: string;
+  uuid: string;
   serie: string;
   folio: string;
   fecha: string;
@@ -33,6 +33,10 @@ export interface ConceptoRecord {
   cantidad: number;
   valorUnitario: number;
   importe: number;
+  baseIVA: number;
+  tasaIVA: number;
+  IVA: number;
+  total: number;
 }
 
 export interface ResumenRecord {
@@ -41,6 +45,8 @@ export interface ResumenRecord {
   cantidad: number;
   valorUnitario: number;
   importe: number;
+  iva: number;
+  total: number;
   registros: number;
 }
 
